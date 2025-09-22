@@ -6,6 +6,8 @@ export interface Machine {
   _id: string;
   _type: 'machine';
   name?: string;
+  slug?: { current: string };
+  callForPrice?: boolean; // <-- ADD THIS LINE
   type?: 'crane' | 'arcade' | 'jukebox' | 'pinball' | 'pool' | 'changer' | 'ride' | 'redemption' | 'bulk_vending' | 'air_hockey' | 'self_merchandiser' | 'reconditioned';
   manufacturer?: string;
   manufacturerWebsite?: string;
@@ -18,6 +20,8 @@ export interface Toy {
     _id: string;
     _type: 'toy';
     name?: string;
+    slug?: { current: string }; // <-- ADD THIS
+    callForPrice?: boolean; // <-- AND THIS
     type?: 'single' | 'medium' | 'jumbo' | 'plastic' | 'beanies' | 'collegiate' | 'watches' | '5inch_rubber_balls' | 'bulk_bouncing_balls' | 'puffer_balls' | 'treasure_chests' | 'christmas_toys';
     image?: SanityImageSource;
     unitPrice?: string;

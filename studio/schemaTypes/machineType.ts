@@ -13,7 +13,27 @@ export const machineType = defineType({
       type: 'string',
     }),
     defineField({
-      name: 'type', // <-- New field for the dropdown
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      options: {
+        source: 'name',
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    // START: ADD THIS NEW FIELD
+    defineField({
+      name: 'callForPrice',
+      title: 'Call for Price',
+      description: 'Check this box to hide the price and show a "Contact us" link instead.',
+      type: 'boolean',
+      initialValue: false, // Default to showing the price
+    }),
+    // END: ADD THIS NEW FIELD
+    defineField({
+      name: 'type',
+      // ... (rest of the type field is unchanged)
       title: 'Machine Type',
       type: 'string',
       options: {
@@ -22,7 +42,6 @@ export const machineType = defineType({
           { title: 'Arcade Machines', value: 'arcade' },
           { title: 'Jukeboxes', value: 'jukebox' },
           { title: 'Pinballs', value: 'pinball' },
-          { title: 'Jukeboxes', value: 'jukebox' },
           { title: 'Pool Tables', value: 'pool' },
           { title: 'Changers', value: 'changer' },
           { title: 'Rides', value: 'ride' },
@@ -32,7 +51,7 @@ export const machineType = defineType({
           { title: 'Self Merchandisers', value: 'self_merchandiser' },
           { title: 'Reconditioned Equipment', value: 'reconditioned' },
         ],
-        layout: 'dropdown', // Optional: Can also be 'radio'
+        layout: 'dropdown',
       },
     }),
     defineField({
@@ -44,26 +63,25 @@ export const machineType = defineType({
       name: 'manufacturerWebsite',
       title: 'Manufacturer Website',
       type: 'url',
-      validation: (Rule) => Rule.uri({
-        scheme: ['http', 'www', 'https', 'mailto', 'tel'],
-      }),
     }),
     defineField({
       name: 'image',
       title: 'Product Image',
       type: 'image',
       options: {
-        hotspot: true, // Enables the hotspot for cropping and positioning
+        hotspot: true,
         sources: [
           MediaLibrary.mediaAssetSource,
         ]
       },
-      validation: (Rule) => Rule.required(), // Make image required
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'price',
       title: 'Price (e.g., 99.99)',
       type: 'string',
+      // This `hidden` property is the magic part for the Studio
+      hidden: ({ document }) => document?.callForPrice === true,
     }),
   ],
 })
