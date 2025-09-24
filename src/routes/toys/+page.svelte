@@ -72,7 +72,7 @@
 {/if}
 
 <div class="p-8 bg-gray-50 min-h-screen">
-  <h1 class="text-4xl font-bold mb-2 text-center text-slate-800">Our Toys</h1>
+  <h1 class="text-4xl font-bold mb-4 text-center text-slate-800">Our Toys</h1>
 
   {#if data.filter}
     <div class="text-center mb-8">

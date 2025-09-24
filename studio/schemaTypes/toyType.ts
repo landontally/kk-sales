@@ -23,11 +23,10 @@ export const toyType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'callForPrice',
-      title: 'Call for Price',
-      description: 'Check this to hide prices and show a "Contact us" link instead.',
+      name: 'inStock',
+      title: 'In Stock',
       type: 'boolean',
-      initialValue: false,
+      initialValue: true, // Default new items to be in stock
     }),
     defineField({
       name: 'type',

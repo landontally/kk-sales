@@ -7,7 +7,8 @@ export interface Machine {
   _type: 'machine';
   name?: string;
   slug?: { current: string };
-  callForPrice?: boolean; // <-- ADD THIS LINE
+  callForPrice?: boolean;
+  inStock?: boolean;
   type?: 'crane' | 'arcade' | 'jukebox' | 'pinball' | 'pool' | 'changer' | 'ride' | 'redemption' | 'bulk_vending' | 'air_hockey' | 'self_merchandiser' | 'reconditioned';
   manufacturer?: string;
   manufacturerWebsite?: string;
@@ -20,11 +21,22 @@ export interface Toy {
     _id: string;
     _type: 'toy';
     name?: string;
-    slug?: { current: string }; // <-- ADD THIS
-    callForPrice?: boolean; // <-- AND THIS
+    slug?: { current: string };
+    inStock?: boolean;
     type?: 'single' | 'medium' | 'jumbo' | 'plastic' | 'beanies' | 'collegiate' | 'watches' | '5inch_rubber_balls' | 'bulk_bouncing_balls' | 'puffer_balls' | 'treasure_chests' | 'christmas_toys';
     image?: SanityImageSource;
     unitPrice?: string;
     casePrice?: string;
     caseQuantity?: string;
+}
+
+export interface HeroSlide {
+  _id: string;
+  _type: 'heroSlide';
+  title?: string;
+  imageDesktop?: SanityImageSource;
+  imageTablet?: SanityImageSource;
+  imageMobile?: SanityImageSource;
+  altText?: string;
+  link?: string;
 }

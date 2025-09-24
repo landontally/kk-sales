@@ -30,6 +30,12 @@ export const machineType = defineType({
       type: 'boolean',
       initialValue: false, // Default to showing the price
     }),
+    defineField({
+      name: 'inStock',
+      title: 'In Stock',
+      type: 'boolean',
+      initialValue: true, // Default new items to be in stock
+    }),
     // END: ADD THIS NEW FIELD
     defineField({
       name: 'type',

@@ -13,27 +13,42 @@ export const heroSlideType = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+    // Main Desktop Image (Largest)
     defineField({
-      name: 'image',
-      title: 'Image',
-      description: 'The main banner image. Recommended size: 1920x800 pixels.',
+      name: 'imageDesktop',
+      title: 'Desktop Image (Large Screens)',
+      description: 'The main banner for large monitors (e.g., 1920px wide or more). This is required.',
       type: 'image',
-      options: {
-        hotspot: true,
-      },
+      options: { hotspot: true },
       validation: (Rule) => Rule.required(),
+    }),
+    // Tablet Image (Optional)
+    defineField({
+      name: 'imageTablet',
+      title: 'Tablet Image (Optional)',
+      description: 'A version cropped for tablet-sized screens (around 768px to 1024px wide).',
+      type: 'image',
+      options: { hotspot: true },
+    }),
+    // Mobile Image (Optional)
+    defineField({
+        name: 'imageMobile',
+        title: 'Mobile Image (Optional)',
+        description: 'A vertically-oriented image for small screens (less than 768px wide).',
+        type: 'image',
+        options: { hotspot: true },
     }),
     defineField({
       name: 'altText',
       title: 'Alternative Text',
-      description: 'Important for SEO and accessibility. Briefly describe the image.',
+      description: 'Important for SEO. Briefly describe the main desktop image.',
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
         name: 'link',
         title: 'Link',
-        description: 'Optional: A URL to go to when the slide is clicked (e.g., /toys?filter=jumbo)',
+        description: 'Optional: A URL to go to when the slide is clicked.',
         type: 'string'
     })
   ],

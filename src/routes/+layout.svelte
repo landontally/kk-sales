@@ -1,18 +1,19 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import { browser } from '$app/environment';
+
+  // --- Your existing script content below ---
   import '../app.css';
 
-  // State variables to track if dropdowns are open
   let showMachinesDropdown = false;
   let showToysDropdown = false;
 
-  // We get these directly from your Sanity schemas to keep them in sync!
   const machineTypes = [
     { title: 'Crane Machines', value: 'crane' },
     { title: 'Arcade Machines', value: 'arcade' },
     { title: 'Jukeboxes', value: 'jukebox' },
     { title: 'Pinballs', value: 'pinball' },
     { title: 'Pool Tables', value: 'pool' }
-    // Add more as needed
   ];
 
   const toyTypes = [
@@ -21,7 +22,6 @@
     { title: 'Jumbo Plush', value: 'jumbo' },
     { title: 'Plastic Toys', value: 'plastic' },
     { title: 'Bouncing Balls', value: 'bulk_bouncing_balls' }
-    // Add more as needed
   ];
 </script>
 
