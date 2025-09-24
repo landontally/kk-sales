@@ -1,10 +1,11 @@
 // studio/schemaTypes/index.ts
 import { type SchemaTypeDefinition } from 'sanity'
-
+import { heroSlideType } from './heroSlideType'
 import { machineType } from './machineType' // <-- Add this line
 import { toyType } from './toyType'     // <-- Add this line
 
 export const schemaTypes = [
+  heroSlideType,
   machineType, // <-- Add this line
   toyType,     // <-- Add this line
 ] as const
