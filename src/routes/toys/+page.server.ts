@@ -4,6 +4,16 @@ import type { Toy } from '$lib/types';
 
 export async function load({ url }) {
   const filter = url.searchParams.get('filter');
+  const sortOrder = url.searchParams.get('sort') || 'createdAt_desc';
+
+  const orderings: { [key: string]: string } = {
+    createdAt_desc: '_createdAt desc',
+    name_asc: 'name asc',
+    casePrice_asc: 'casePrice asc',
+    casePrice_desc: 'casePrice desc',
+  };
+
+  const finalOrder = orderings[sortOrder] || orderings.createdAt_desc;
 
   let groqQuery = `*[_type == "toy"`;
   const params: { filter?: string } = {};
@@ -13,14 +23,15 @@ export async function load({ url }) {
     params.filter = filter;
   }
 
-  groqQuery += `]`;
+  groqQuery += `] | order(${finalOrder})`;
 
   const toys = await client.fetch<Toy[]>(groqQuery, params);
 
   if (toys) {
     return { 
         toys,
-        filter
+        filter,
+        sortOrder
     };
   }
   return {

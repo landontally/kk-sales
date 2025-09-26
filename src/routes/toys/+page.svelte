@@ -1,31 +1,49 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import type { Toy } from '$lib/types'; // Import the Toy type
+  import type { Toy } from '$lib/types';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
   import imageUrlBuilder from '@sanity/image-url';
   import { client } from '$lib/sanityClient';
-  import Modal from '$lib/components/Modal.svelte'; // Import our Modal
+  import Modal from '$lib/components/Modal.svelte';
 
   export let data: PageData;
 
-  // State to manage the modal
+  const toyTypes = [
+    { title: 'Single Plush', value: 'single' },
+    { title: 'Medium Plush', value: 'medium' },
+    { title: 'Jumbo Plush', value: 'jumbo' },
+    { title: 'Plastic Toys', value: 'plastic' },
+    { title: 'Beanies', value: 'beanies' },
+    { title: 'Collegiate Beanies', value: 'collegiate' },
+    { title: 'Watches', value: 'watches' },
+    { title: '5" Rubber Balls', value: '5inch_rubber_balls' },
+    { title: 'Bulk & Bouncing Balls', value: 'bulk_bouncing_balls' },
+    { title: 'Puffer Balls', value: 'puffer_balls' },
+    { title: 'Treasure Chests', value: 'treasure_chests' },
+    { title: 'Christmas Toys', value: 'christmas_toys' },
+  ];
+
   let selectedToy: Toy | null = null;
-
-  function openModal(toy: Toy) {
-    selectedToy = toy;
-  }
-
-  function closeModal() {
-    selectedToy = null;
-  }
+  function openModal(toy: Toy) { selectedToy = toy; }
+  function closeModal() { selectedToy = null; }
 
   const builder = imageUrlBuilder(client);
   function urlFor(source: any) {
+    if (!source) return null;
     return builder.image(source);
   }
 
-  function formatTitle(value: string | null) {
+  function formatTitle(value: string | undefined | null): string {
       if (!value) return '';
       return value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+  }
+
+  function handleSortChange(event: Event) {
+    const newSortOrder = (event.target as HTMLSelectElement).value;
+    const url = new URL($page.url);
+    url.searchParams.set('sort', newSortOrder);
+    goto(url.toString(), { keepFocus: true, noScroll: true });
   }
 </script>
 
@@ -34,7 +52,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#if selectedToy.image}
         <img
-          src={urlFor(selectedToy.image).width(800).auto('format').url()}
+          src={urlFor(selectedToy.image)?.width(800).auto('format').url()}
           alt={selectedToy.name ?? 'Toy Image'}
           class="rounded-lg shadow-lg w-full"
         />
@@ -43,6 +61,14 @@
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedToy.name}</h1>
         <p class="text-lg text-slate-600 mt-2 capitalize">{formatTitle(selectedToy.type)}</p>
+
+        <div class="mt-4 font-bold text-lg">
+          {#if selectedToy.inStock}
+            <p class="text-green-600">IN STOCK</p>
+          {:else}
+            <p class="text-red-600">OUT OF STOCK</p>
+          {/if}
+        </div>
 
         <div class="mt-8 p-6 border rounded-lg bg-gray-50">
           {#if selectedToy.callForPrice}
@@ -71,39 +97,73 @@
   </Modal>
 {/if}
 
-<div class="p-8 bg-gray-50 min-h-screen">
-  <h1 class="text-4xl font-bold mb-4 text-center text-slate-800">Our Toys</h1>
+<div class="container mx-auto p-8">
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
-  {#if data.filter}
-    <div class="text-center mb-8">
-      <h2 class="text-2xl text-slate-600">
-        Showing: <span class="font-semibold">{formatTitle(data.filter)}</span>
-      </h2>
-      <a href="/toys" class="text-blue-600 hover:underline text-sm">Clear Filter</a>
-    </div>
-  {/if}
+    <aside class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md h-fit">
+      <h3 class="text-xl font-bold mb-4 text-slate-800">Categories</h3>
+      <ul class="space-y-2">
+        <li>
+          <a href="/toys" class="block w-full text-left text-lg hover:text-indigo-600 transition-colors {!data.filter ? 'font-bold text-indigo-600' : 'text-slate-700'}">
+            All Toys
+          </a>
+        </li>
+        {#each toyTypes as type}
+          <li>
+            <a href="/toys?filter={type.value}" class="block w-full text-left text-lg hover:text-indigo-600 transition-colors {data.filter === type.value ? 'font-bold text-indigo-600' : 'text-slate-700'}">
+              {type.title}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    </aside>
 
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-    {#each data.toys as toy}
-      <button on:click={() => openModal(toy)} class="text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
-        {#if toy.image}
-          <img
-            src={urlFor(toy.image).width(400).height(300).auto('format').url()}
-            alt={toy.name ?? 'Toy image'}
-            class="w-full h-48 object-cover"
-          />
-        {/if}
-        <div class="p-4">
-          <h2 class="text-xl font-semibold text-slate-900 truncate" title={toy.name}>{toy.name}</h2>
-          <div class="mt-4">
-            {#if toy.callForPrice}
-              <p class="text-lg font-semibold text-blue-700">Contact for Price</p>
-            {:else}
-              <p class="text-lg font-bold text-blue-700">${toy.casePrice} / Case</p>
-            {/if}
-          </div>
+    <main class="lg:col-span-3">
+      <div class="flex flex-col md:flex-row justify-between md:items-center mb-8 gap-4">
+        <h1 class="text-4xl font-bold text-slate-800 text-center md:text-left">Our Toys</h1>
+        <div>
+          <label for="sort" class="text-sm font-medium text-gray-700 mr-2">Sort by:</label>
+          <select id="sort" name="sort" class="rounded-md border-gray-300 shadow-sm" on:change={handleSortChange} value={data.sortOrder}>
+            <option value="createdAt_desc">Newest</option>
+            <option value="name_asc">Alphabetical (A-Z)</option>
+            <option value="casePrice_asc">Price: Low to High</option>
+            <option value="casePrice_desc">Price: High to Low</option>
+          </select>
         </div>
-      </button>
-    {/each}
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+        {#each data.toys as toy}
+          <button on:click={() => openModal(toy)} class="text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
+            {#if toy.image}
+              <img
+                src={urlFor(toy.image)?.width(400).height(300).auto('format').url()}
+                alt={toy.name ?? 'Toy image'}
+                class="w-full h-48 object-cover"
+              />
+            {/if}
+            <div class="p-4">
+              <h2 class="text-xl font-semibold text-slate-900 truncate" title={toy.name}>{toy.name}</h2>
+              <div class="mt-4">
+                {#if toy.callForPrice}
+                  <p class="font-semibold text-blue-700">Contact for Price</p>
+                {:else}
+                  <p class="font-bold text-blue-700">${toy.casePrice} / Case</p>
+                {/if}
+              </div>
+
+              <div class="mt-2 font-bold text-sm">
+                {#if toy.inStock}
+                  <p class="text-green-600">IN STOCK</p>
+                {:else}
+                  <p class="text-red-600">OUT OF STOCK</p>
+                {/if}
+              </div>
+
+            </div>
+          </button>
+        {/each}
+      </div>
+    </main>
   </div>
 </div>

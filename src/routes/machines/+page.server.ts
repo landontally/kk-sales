@@ -2,30 +2,38 @@
 import { client } from '$lib/sanityClient';
 import type { Machine } from '$lib/types';
 
-// The `load` function receives details about the request, including the URL.
 export async function load({ url }) {
-  // Get the 'filter' query parameter from the URL (e.g., "?filter=crane")
   const filter = url.searchParams.get('filter');
+  const sortOrder = url.searchParams.get('sort') || 'createdAt_desc'; // Default to Newest
 
-  // Start with the base query
+  // Define our sorting options
+  const orderings: { [key: string]: string } = {
+    createdAt_desc: '_createdAt desc',
+    name_asc: 'name asc',
+    price_asc: 'price asc',
+    price_desc: 'price desc',
+  };
+
+  const finalOrder = orderings[sortOrder] || orderings.createdAt_desc;
+
   let groqQuery = `*[_type == "machine"`;
   const params: { filter?: string } = {};
 
-  // If a filter exists, add it to our query and params
   if (filter) {
     groqQuery += ` && type == $filter`;
     params.filter = filter;
   }
 
-  // Close the query bracket
-  groqQuery += `]`;
+  // Add the dynamic ordering to the query
+  groqQuery += `] | order(${finalOrder})`;
 
   const machines = await client.fetch<Machine[]>(groqQuery, params);
 
   if (machines) {
     return {
       machines,
-      filter // Return the filter so the page knows what's active
+      filter,
+      sortOrder // Pass the current sort order to the page
     };
   }
   return {

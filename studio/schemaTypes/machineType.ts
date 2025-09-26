@@ -85,7 +85,7 @@ export const machineType = defineType({
     defineField({
       name: 'price',
       title: 'Price (e.g., 99.99)',
-      type: 'string',
+      type: 'number',
       // This `hidden` property is the magic part for the Studio
       hidden: ({ document }) => document?.callForPrice === true,
     }),
