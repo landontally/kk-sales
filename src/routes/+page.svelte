@@ -188,9 +188,9 @@
   </div>
 </div>
 
-<div class="w-full py-16">
+<div class="w-full py-8">
   <div class="container mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">Latest Toys</h2>
+    <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">Our Newest Toys</h2>
     <Splide options={{
       type: 'loop',
       perPage: 5,
@@ -249,9 +249,9 @@
   </div>
 </div>
 
-<div class="w-full py-16">
+<div class="w-full py-8">
   <div class="container mx-auto">
-    <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">Latest Game Machines</h2>
+    <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">The Latest Machines</h2>
     <Splide options={{
       type: 'loop',
       perPage: 5,
