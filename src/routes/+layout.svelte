@@ -87,9 +87,9 @@
       <a href="/contact" class="text-white hover:text-indigo-200 text-lg px-4">Contact</a>
 
       <div class="flex items-center ml-8 pl-4">
-        <a href="tel:1-800-555-5555" class="text-white hover:text-indigo-200 flex items-center gap-2">
+        <a href="tel:812-334-1936" class="text-white hover:text-indigo-200 flex items-center gap-2">
           <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-          <span class="font-bold">1-800-555-5555</span>
+          <span class="font-bold">812-334-1936</span>
         </a>
       </div>
     </div>
@@ -167,7 +167,7 @@
             <a href="tel:812-334-1936" class="hover:underline">812-334-1936</a>
           </p>
           <p>
-            <a href="mailto:sales@yourcompany.com" class="hover:underline">mail@kksales.com</a>
+            <a href="mailto:mail@kksales.com" class="hover:underline">mail@kksales.com</a>
           </p>
         </address>
           <div class="mt-4">

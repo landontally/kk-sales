@@ -40,3 +40,12 @@ export interface HeroSlide {
   altText?: string;
   link?: string;
 }
+
+export interface EventBanner {
+  _id: string;
+  _type: 'eventBanner';
+  title?: string;
+  image?: SanityImageSource;
+  altText?: string;
+  link?: string;
+}

@@ -1,22 +1,27 @@
 // src/routes/+page.server.ts
 import { client } from '$lib/sanityClient';
-import type { HeroSlide, Toy, Machine } from '$lib/types'; // Add Machine
+import type { HeroSlide, Toy, Machine, EventBanner } from '$lib/types';
 import { error } from '@sveltejs/kit';
 
 export async function load() {
   try {
-    const slideQuery = `*[_type == "heroSlide"]`;
+    // MODIFIED: Added "| order(sortOrder asc)" to the query
+    const slideQuery = `*[_type == "heroSlide"] | order(sortOrder asc)`;
+
     const latestToysQuery = `*[_type == "toy"] | order(_createdAt desc) [0...8]`;
-    const latestMachinesQuery = `*[_type == "machine"] | order(_createdAt desc) [0...8]`; // Add this query
+    const latestMachinesQuery = `*[_type == "machine"] | order(_createdAt desc) [0...8]`;
+    const eventBannerQuery = `*[_type == "eventBanner" && _id == "eventBanner"][0]`;
 
     const slides = await client.fetch<HeroSlide[]>(slideQuery);
     const latestToys = await client.fetch<Toy[]>(latestToysQuery);
-    const latestMachines = await client.fetch<Machine[]>(latestMachinesQuery); // Fetch the data
+    const latestMachines = await client.fetch<Machine[]>(latestMachinesQuery);
+    const eventBanner = await client.fetch<EventBanner>(eventBannerQuery);
 
     return { 
       slides: slides || [],
       latestToys: latestToys || [],
-      latestMachines: latestMachines || [] // Return the data
+      latestMachines: latestMachines || [],
+      eventBanner: eventBanner || null
     };
 
   } catch (err) {

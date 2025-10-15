@@ -125,7 +125,7 @@
     rewind: true,
     perPage: 1,
     autoplay: true,
-    interval: 5000,
+    interval: 7500,
     pauseOnHover: true,
     gap: '1rem',
     height: '50vh',
@@ -164,6 +164,22 @@
   </Splide>
 </div>
 
+{#if data.eventBanner && data.eventBanner.image}
+  <div class="container mx-auto px-8 py-10">
+    <a 
+      href={data.eventBanner.link} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="block w-full md:w-3/4 lg:w-1/2 mx-auto rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105"
+    >
+      <img 
+        src={urlFor(data.eventBanner.image)?.width(1200).auto('format').url()}
+        alt={data.eventBanner.altText}
+        class="w-full h-auto"
+      />
+    </a>
+  </div>
+{/if}
 
 <div class="container mx-auto p-8 text-center">
   <h1 class="text-5xl font-extrabold text-slate-900 mt-12">

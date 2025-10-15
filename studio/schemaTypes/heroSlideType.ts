@@ -13,6 +13,13 @@ export const heroSlideType = defineType({
       type: 'string',
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'sortOrder',
+      title: 'Sort Order',
+      description: 'A number to control the order of the slides. Lower numbers appear first (e.g., 1, 2, 3).',
+      type: 'number',
+      validation: (Rule) => Rule.required().integer().positive(),
+    }),
     // Main Desktop Image (Largest)
     defineField({
       name: 'imageDesktop',
