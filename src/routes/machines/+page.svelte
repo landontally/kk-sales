@@ -1,3 +1,8 @@
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content="Browse our wide selection of new and reconditioned crane machines, arcade games, pinball, and more." />
+</svelte:head>
+
 <script lang="ts">
   import type { PageData } from './$types';
   import type { Machine } from '$lib/types';
@@ -8,6 +13,10 @@
   import Modal from '$lib/components/Modal.svelte';
 
   export let data: PageData;
+
+  $: title = data.filter 
+    ? `${formatTitle(data.filter)} | K&K Sales` 
+    : 'All Machines | K&K Sales';
 
   const machineTypes = [
     { title: 'Crane Machines', value: 'crane' },

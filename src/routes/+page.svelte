@@ -1,3 +1,8 @@
+<svelte:head>
+  <title>K&K Sales | Homepage</title>
+  <meta name="description" content="Welcome to K&K Sales, your trusted source for coin-operated amusements, toys, and more." />
+</svelte:head>
+
 <script lang="ts">
   import type { PageData } from './$types';
   import imageUrlBuilder from '@sanity/image-url';

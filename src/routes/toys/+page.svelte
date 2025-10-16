@@ -1,3 +1,8 @@
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content="Explore our huge catalog of plush toys, bouncy balls, novelties, and prizes for your crane machines." />
+</svelte:head>
+
 <script lang="ts">
   import type { PageData } from './$types';
   import type { Toy } from '$lib/types';
@@ -8,6 +13,10 @@
   import Modal from '$lib/components/Modal.svelte';
 
   export let data: PageData;
+
+  $: title = data.filter 
+    ? `${formatTitle(data.filter)} | K&K Sales` 
+    : 'All Toys | K&K Sales';
 
   const toyTypes = [
     { title: 'Single Plush', value: 'single' },
