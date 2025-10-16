@@ -52,7 +52,8 @@
         <img 
           src="/logo.png" 
           alt="K&K Sales Logo" 
-          class="h-20 w-auto transition-transform duration-300 ease-in-out hover:scale-110" />
+          class="h-14 lg:h-20 w-auto transition-transform duration-300 ease-in-out hover:scale-110" 
+        />
       </a>
     </div>
 
@@ -121,7 +122,7 @@
   </div>
 </header>
 
-<main>
+<main class="bg-white">
   <slot />
 </main>
 
