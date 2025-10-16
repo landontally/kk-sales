@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { Z_PARTIAL_FLUSH } from 'zlib';
   import '../app.css';
 
   // --- State for Dropdowns ---
@@ -40,11 +41,11 @@
 </script>
 
 <svelte:head>
-  <title>K&K Sales | Crane Machines, Toys, and Arcade Games</title>
+  <title>K&K Sales | Crane Machines, Plush, and Toys</title>
   <meta name="description" content="Your trusted source for coin-operated crane machines, toys, arcade games, and more." />
 </svelte:head>
 
-<header class="bg-blue-900 shadow-md sticky top-0 z-50">
+<header class="bg-sky-700 shadow-md sticky top-0 z-50">
   <nav class="container mx-auto px-6 h-20 flex justify-between items-center">
     <div class="flex-shrink-0">
       <a href="/" class="text-2xl font-bold text-white hover:text-indigo-200">
@@ -102,7 +103,7 @@
   </nav>
 
   {#if isMobileMenuOpen}
-    <div class="lg:hidden bg-blue-800">
+    <div class="lg:hidden bg-sky-700">
       <a href="/machines" class="block py-2 px-6 text-white hover:bg-blue-700">Machines</a>
       <a href="/toys" class="block py-2 px-6 text-white hover:bg-blue-700">Toys</a>
       <a href="/about" class="block py-2 px-6 text-white hover:bg-blue-700">About Us</a>
@@ -121,7 +122,7 @@
   <slot />
 </main>
 
-<footer class="bg-blue-900 text-white">
+<footer class="bg-sky-700 text-white">
   <div class="container mx-auto py-12 px-8">
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 
