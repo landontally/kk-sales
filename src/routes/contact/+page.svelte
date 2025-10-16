@@ -11,8 +11,8 @@
   const officeInfo = {
     addressLine1: "1440 South Liberty Drive",
     addressLine2: "Bloomington, IN 47403",
-    phone: "(812) 555-1234",
-    facebookUrl: "https://www.facebook.com/your-business-page",
+    phone: "(812) 334-1936",
+    facebookUrl: "https://www.facebook.com/profile.php?id=61556391602105",
   };
 
   // Google Maps embed URL, zoomed in on the specific address.
