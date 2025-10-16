@@ -1,3 +1,8 @@
+<svelte:head>
+  <title>K&K Sales | Contact Us</title>
+  <meta name="description" content="Contact us to purchase toys, plush, and our game machines!" />
+</svelte:head>
+
 <script lang="ts">
   // This is a Svelte component for a contact page.
   // It's designed to be used with SvelteKit and styled with Tailwind CSS.
