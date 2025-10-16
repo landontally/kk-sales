@@ -52,8 +52,7 @@
         <img 
           src="/logo.png" 
           alt="K&K Sales Logo" 
-          class="h-12 w-auto transition-transform duration-300 ease-in-out hover:scale-110"
-        />
+          class="h-16 w-auto transition-transform duration-300 ease-in-out hover:scale-110" />
       </a>
     </div>
 
