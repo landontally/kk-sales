@@ -133,30 +133,30 @@
     interval: 7500,
     pauseOnHover: true,
     gap: '1rem',
-    height: '50vh',
   }}>
     {#if data.slides && data.slides.length > 0}
       {#each data.slides as slide}
         <SplideSlide>
-          <a href={slide.link ?? '#'} class="block h-full w-full bg-gray-900">
+          <a 
+            href={slide.link ?? '#'} 
+            class="block w-full bg-gray-900 h-[70vh] md:h-[60vh] lg:h-[50vh]"
+          >
             <picture class="w-full h-full block">
               {#if slide.imageMobile}
                 <source
                   media="(max-width: 767px)"
-                  srcset={urlFor(slide.imageMobile)?.width(767).height(250).auto('format').url()}
+                  srcset={urlFor(slide.imageMobile)?.width(800).height(1000).auto('format').url()}
                 />
               {/if}
-
               {#if slide.imageTablet}
                 <source
                   media="(max-width: 1023px)"
-                  srcset={urlFor(slide.imageTablet)?.width(1023).height(400).auto('format').url()}
+                  srcset={urlFor(slide.imageTablet)?.width(1023).height(600).auto('format').url()}
                 />
               {/if}
-
               {#if slide.imageDesktop}
                 <img
-                  src={urlFor(slide.imageDesktop)?.width(1920).height(500).auto('format').url()}
+                  src={urlFor(slide.imageDesktop)?.width(1920).height(700).auto('format').url()}
                   alt={slide.altText}
                   class="w-full h-full object-cover"
                 />

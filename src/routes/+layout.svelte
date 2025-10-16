@@ -46,7 +46,8 @@
 </svelte:head>
 
 <header class="bg-sky-700 shadow-md sticky top-0 z-50">
-  <nav class="container mx-auto px-6 h-20 flex justify-between items-center">
+  <nav class="container mx-auto px-4 lg:px-6 h-20 lg:h-24 flex justify-between items-center">
+    
     <div class="flex-shrink-0">
       <a href="/" class="block">
         <img 
