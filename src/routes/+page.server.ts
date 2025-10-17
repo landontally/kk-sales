@@ -1,6 +1,7 @@
 // src/routes/+page.server.ts
-
-// ... imports
+import { client } from '$lib/sanityClient';
+import type { HeroSlide, Toy, Machine, EventBanner } from '$lib/types';
+import { error } from '@sveltejs/kit';
 
 export async function load() {
   try {
