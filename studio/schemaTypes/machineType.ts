@@ -36,6 +36,13 @@ export const machineType = defineType({
       type: 'boolean',
       initialValue: true, // Default new items to be in stock
     }),
+    defineField({
+      name: 'isNew',
+      title: 'Feature on Homepage',
+      description: 'Check this to feature this item on the homepage carousels.',
+      type: 'boolean',
+      initialValue: false,
+    }),
     // END: ADD THIS NEW FIELD
     defineField({
       name: 'type',

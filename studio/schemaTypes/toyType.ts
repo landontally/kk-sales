@@ -29,6 +29,13 @@ export const toyType = defineType({
       initialValue: true, // Default new items to be in stock
     }),
     defineField({
+      name: 'isNew',
+      title: 'Feature on Homepage',
+      description: 'Check this to feature this item on the homepage carousels.',
+      type: 'boolean',
+      initialValue: false,
+    }),
+    defineField({
       name: 'type',
       title: 'Toy Type',
       type: 'string',

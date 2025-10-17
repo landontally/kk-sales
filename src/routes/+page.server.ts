@@ -8,8 +8,9 @@ export async function load() {
     // MODIFIED: Added "| order(sortOrder asc)" to the query
     const slideQuery = `*[_type == "heroSlide"] | order(sortOrder asc)`;
 
-    const latestToysQuery = `*[_type == "toy"] | order(_createdAt desc) [0...8]`;
-    const latestMachinesQuery = `*[_type == "machine"] | order(_createdAt desc) [0...8]`;
+// MODIFIED: Prioritize `isNew` items, then sort by creation date
+    const latestToysQuery = `*[_type == "toy"] | order(isNew desc, _createdAt desc) [0...8]`;
+    const latestMachinesQuery = `*[_type == "machine"] | order(isNew desc, _createdAt desc) [0...8]`;
     const eventBannerQuery = `*[_type == "eventBanner" && _id == "eventBanner"][0]`;
 
     const slides = await client.fetch<HeroSlide[]>(slideQuery);

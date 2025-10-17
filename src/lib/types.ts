@@ -9,6 +9,7 @@ export interface Machine {
   slug?: { current: string };
   callForPrice?: boolean;
   inStock?: boolean;
+  isNew?: boolean;
   type?: 'crane' | 'arcade' | 'jukebox' | 'pinball' | 'pool' | 'changer' | 'ride' | 'redemption' | 'bulk_vending' | 'air_hockey' | 'self_merchandiser' | 'reconditioned';
   manufacturer?: string;
   manufacturerWebsite?: string;
@@ -23,6 +24,7 @@ export interface Toy {
     name?: string;
     slug?: { current: string };
     inStock?: boolean;
+    isNew?: boolean;
     type?: 'single' | 'medium' | 'jumbo' | 'plastic' | 'beanies' | 'collegiate' | 'watches' | '5inch_rubber_balls' | 'bulk_bouncing_balls' | 'puffer_balls' | 'treasure_chests' | 'christmas_toys';
     image?: SanityImageSource;
     unitPrice?: string;
