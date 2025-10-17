@@ -60,7 +60,7 @@
           </div>
         <div class="mt-8 p-6 border rounded-lg bg-gray-50">
           {#if selectedToy.callForPrice}
-            <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedToy.name}" class="text-2xl font-bold text-blue-700 hover:underline">
+            <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedToy.name}" class="text-2xl font-bold text-blue-700 hover:underline">
               Please contact us for a price
             </a>
           {:else}
@@ -107,7 +107,7 @@
           </div>
         <div class="mt-6">
           {#if selectedMachine.callForPrice}
-            <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
+            <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
               Please contact us for a price
             </a>
           {:else}
