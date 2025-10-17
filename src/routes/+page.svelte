@@ -240,7 +240,7 @@
                 <img
                   src={urlFor(toy.image)?.width(400).height(400).auto('format').url()}
                   alt={toy.name}
-                  class="w-full h-64 object-cover pointer-events-none"
+                  class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
               <div class="p-4">
@@ -300,7 +300,7 @@
                 <img
                   src={urlFor(machine.image)?.width(400).height(400).auto('format').url()}
                   alt={machine.name}
-                  class="w-full h-64 object-cover pointer-events-none"
+                  class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
               <div class="p-4">

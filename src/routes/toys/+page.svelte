@@ -143,12 +143,12 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {#each data.toys as toy}
-          <button on:click={() => openModal(toy)} class="text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
+          <button on:click={() => openModal(toy)} class="cursor-pointer text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
             {#if toy.image}
               <img
-                src={urlFor(toy.image)?.width(400).height(300).auto('format').url()}
+                src={urlFor(toy.image)?.width(500).height(350).auto('format').url()}
                 alt={toy.name ?? 'Toy image'}
-                class="w-full h-48 object-cover"
+                class="w-full h-48 object-contain"
               />
             {/if}
             <div class="p-4">
