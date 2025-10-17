@@ -238,7 +238,7 @@
             >
               {#if toy.image}
                 <img
-                  src={urlFor(toy.image)?.width(400).height(400).auto('format').url()}
+                  src={urlFor(toy.image)?.width(550).height(450).auto('format').url()}
                   alt={toy.name}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
@@ -298,7 +298,7 @@
             >
               {#if machine.image}
                 <img
-                  src={urlFor(machine.image)?.width(400).height(400).auto('format').url()}
+                  src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
                   alt={machine.name}
                   class="w-full h-64 object-contain pointer-events-none"
                 />

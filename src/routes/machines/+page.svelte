@@ -134,9 +134,9 @@
           <button on:click={() => openModal(machine)} class="cursor-pointer text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
             {#if machine.image}
               <img
-                src={urlFor(machine.image)?.width(400).height(300).auto('format').url()}
+                src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
                 alt={machine.name ?? 'Machine image'}
-                class="w-full h-48 object-cover"
+                class="w-full h-48 object-contain"
               />
             {/if}
             <div class="p-4 flex flex-col justify-between flex-grow">
