@@ -1,16 +1,15 @@
 // src/routes/+page.server.ts
-import { client } from '$lib/sanityClient';
-import type { HeroSlide, Toy, Machine, EventBanner } from '$lib/types';
-import { error } from '@sveltejs/kit';
+
+// ... imports
 
 export async function load() {
   try {
-    // MODIFIED: Added "| order(sortOrder asc)" to the query
     const slideQuery = `*[_type == "heroSlide"] | order(sortOrder asc)`;
 
-// MODIFIED: Prioritize `isNew` items, then sort by creation date
-    const latestToysQuery = `*[_type == "toy"] | order(isNew desc, _createdAt desc) [0...8]`;
-    const latestMachinesQuery = `*[_type == "machine"] | order(isNew desc, _createdAt desc) [0...8]`;
+    // MODIFIED: Added "&& isNew == true" to filter for featured items only
+    const latestToysQuery = `*[_type == "toy" && isNew == true] | order(_createdAt desc) [0...8]`;
+    const latestMachinesQuery = `*[_type == "machine" && isNew == true] | order(_createdAt desc) [0...8]`;
+    
     const eventBannerQuery = `*[_type == "eventBanner" && _id == "eventBanner"][0]`;
 
     const slides = await client.fetch<HeroSlide[]>(slideQuery);
