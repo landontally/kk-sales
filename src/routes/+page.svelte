@@ -238,8 +238,8 @@
             >
               {#if toy.image}
                 <img
-                  src={urlFor(toy.image)?.width(600).height(450).auto('format').url()}
-                  alt={toy.name}
+                  src={urlFor(toy.image)?.width(550).height(450).auto('format').url()}
+                  alt={toy.name ?? 'Toy image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
