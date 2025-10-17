@@ -237,11 +237,12 @@
               class="cursor-pointer h-full border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300"
             >
               {#if toy.image}
-                <img
-                  src={urlFor(toy.image)?.width(500).height(500).auto('format').url()}
-                  alt={toy.name}
-                  class="w-full h-64 object-contain pointer-events-none"
-                />
+                <div class="w-full h-64 bg-gray-100">
+                  <img
+                    src={urlFor(toy.image)?.width(400).height(400).auto('format').url()}
+                    alt={toy.name}
+                    class="w-full h-full object-contain pointer-events-none" />
+                </div>
               {/if}
               <div class="p-4">
                 <h3 class="text-lg font-semibold text-slate-900 truncate">
