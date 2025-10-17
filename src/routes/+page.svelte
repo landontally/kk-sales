@@ -298,8 +298,8 @@
             >
               {#if machine.image}
                 <img
-                  src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
-                  alt={machine.name}
+                  src={urlFor(machine.image)?.width(450).height(500).auto('format').url()}
+                  alt={machine.name ?? 'Machine image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
