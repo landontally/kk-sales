@@ -11,6 +11,8 @@
   import imageUrlBuilder from '@sanity/image-url';
   import { client } from '$lib/sanityClient';
   import Modal from '$lib/components/Modal.svelte';
+  import { onMount, onDestroy } from 'svelte'; // Import onDestroy
+  import { browser } from '$app/environment'; // Import browser check
 
   export let data: PageData;
 
@@ -56,13 +58,46 @@
   }
 
   let isCategoryDropdownOpen = false;
+  let categoryDropdownContainer: HTMLElement; // Reference to the dropdown's outer div
+  let categoryDropdownButton: HTMLElement; // Reference to the button
+
+  // --- State for Mobile Category Dropdown ---
+  let isCategoryDropdownOpen = false;
+  let categoryDropdownContainer: HTMLElement; // Reference to the dropdown's outer div
+  let categoryDropdownButton: HTMLElement; // Reference to the button
+
+  // --- Click Outside Logic for Category Dropdown ---
+  function handleCategoryClickOutside(event: MouseEvent) {
+    if (
+        categoryDropdownContainer && 
+        !categoryDropdownContainer.contains(event.target as Node) &&
+        categoryDropdownButton &&
+        !categoryDropdownButton.contains(event.target as Node)
+       ) {
+      isCategoryDropdownOpen = false;
+    }
+  }
+
+  $: if (browser && isCategoryDropdownOpen) {
+    setTimeout(() => window.addEventListener('click', handleCategoryClickOutside), 0);
+  } else if (browser) {
+    window.removeEventListener('click', handleCategoryClickOutside);
+  }
+
+  onDestroy(() => {
+    if (browser) {
+      window.removeEventListener('click', handleCategoryClickOutside);
+    }
+  });
 </script>
 
-<div class="block lg:hidden mb-6 sticky top-20 z-40 bg-gray-50 py-2 shadow-md border-b border-gray-200">
+<div 
+  bind:this={categoryDropdownContainer} class="block lg:hidden mb-6 sticky top-20 z-40 bg-gray-50 py-2 shadow-md border-b border-gray-200"
+>
   <div class="container mx-auto px-4">
     <div class="relative">
       <button 
-        on:click={() => isCategoryDropdownOpen = !isCategoryDropdownOpen}
+        bind:this={categoryDropdownButton} on:click={() => isCategoryDropdownOpen = !isCategoryDropdownOpen}
         class="w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex justify-between items-center"
         aria-haspopup="true"
         aria-expanded={isCategoryDropdownOpen}
@@ -80,8 +115,8 @@
         >
           <div class="py-1" role="none">
             <a 
-              href="/toys" 
-              on:click={() => isCategoryDropdownOpen = false} class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {!data.filter ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
+              href="/toys" on:click={() => isCategoryDropdownOpen = false} 
+              class="..."
               role="menuitem"
             >
               All Toys

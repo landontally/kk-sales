@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { Z_PARTIAL_FLUSH } from 'zlib';
   import '../app.css';
+  import { onMount, onDestroy } from 'svelte'; // Import onDestroy
+  import { browser } from '$app/environment'; // Import browser check
 
   // --- State for Dropdowns ---
   let showMachinesDropdown = false;
@@ -8,6 +9,8 @@
 
   // --- State for Mobile Menu ---
   let isMobileMenuOpen = false;
+  let mobileMenuElement: HTMLElement; // Reference to the menu div
+  let mobileMenuButton: HTMLElement; // Reference to the button
 
   // --- Category Lists (no changes) ---
   const machineTypes = [
@@ -24,6 +27,7 @@
     { title: 'Self Merchandisers', value: 'self_merchandiser' },
     { title: 'Reconditioned Equipment', value: 'reconditioned' },
   ];
+
   const toyTypes = [
     { title: 'Single Plush', value: 'single' },
     { title: 'Medium Plush', value: 'medium' },
@@ -38,6 +42,33 @@
     { title: 'Treasure Chests', value: 'treasure_chests' },
     { title: 'Christmas Toys', value: 'christmas_toys' },
   ];
+
+  function handleClickOutside(event: MouseEvent) {
+    // Check if click is outside the menu AND outside the button that opens it
+    if (
+        mobileMenuElement && 
+        !mobileMenuElement.contains(event.target as Node) &&
+        mobileMenuButton && 
+        !mobileMenuButton.contains(event.target as Node) 
+       ) {
+      isMobileMenuOpen = false;
+    }
+  }
+
+  // Add/remove listener when menu opens/closes
+  $: if (browser && isMobileMenuOpen) {
+    // Use timeout to prevent immediate closing on the same click that opened it
+    setTimeout(() => window.addEventListener('click', handleClickOutside), 0);
+  } else if (browser) {
+    window.removeEventListener('click', handleClickOutside);
+  }
+
+  // Cleanup listener on component destroy
+  onDestroy(() => {
+    if (browser) {
+      window.removeEventListener('click', handleClickOutside);
+    }
+  });
 </script>
 
 <svelte:head>
@@ -47,7 +78,7 @@
 
 <header class="bg-sky-700 shadow-md sticky top-0 z-50">
   <nav class="container mx-auto px-4 lg:px-6 h-20 lg:h-24 flex justify-between items-center">
-    
+
     <div class="flex-shrink-0">
       <a href="/" class="block">
         <img 
@@ -101,14 +132,17 @@
     </div>
     
     <div class="lg:hidden">
-      <button on:click={() => isMobileMenuOpen = !isMobileMenuOpen} class="text-white focus:outline-none">
+      <button 
+        bind:this={mobileMenuButton} 
+        on:click={() => isMobileMenuOpen = !isMobileMenuOpen} 
+        class="text-white focus:outline-none"
+      >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
       </button>
-    </div>
   </nav>
 
-  {#if isMobileMenuOpen}
-    <div class="lg:hidden bg-sky-700">
+{#if isMobileMenuOpen}
+    <div bind:this={mobileMenuElement} class="lg:hidden bg-sky-700">
       <a href="/machines" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Machines</a>
       <a href="/toys" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Toys</a>
       <a href="/about" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">About Us</a>
