@@ -109,11 +109,11 @@
 
   {#if isMobileMenuOpen}
     <div class="lg:hidden bg-sky-700">
-      <a href="/machines" class="block py-2 px-6 text-white hover:bg-blue-700">Machines</a>
-      <a href="/toys" class="block py-2 px-6 text-white hover:bg-blue-700">Toys</a>
-      <a href="/about" class="block py-2 px-6 text-white hover:bg-blue-700">About Us</a>
-      <a href="/contact" class="block py-2 px-6 text-white hover:bg-blue-700">Contact</a>
-      <a href="tel:812-334-1936" class="block py-4 px-6 text-white font-bold hover:bg-blue-700 border-t border-blue-700">Call Us</a>
+      <a href="/machines" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Machines</a>
+      <a href="/toys" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Toys</a>
+      <a href="/about" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">About Us</a>
+      <a href="/contact" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Contact</a>
+      <a href="tel:812-334-1936" on:click={() => isMobileMenuOpen = false} class="block py-4 px-6 text-white font-bold hover:bg-blue-700 border-t border-blue-700">Call Us</a>
     </div>
   {/if}
 
