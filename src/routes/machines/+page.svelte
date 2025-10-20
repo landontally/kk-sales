@@ -56,6 +56,31 @@
   }
 </script>
 
+<div class="block lg:hidden mb-6 sticky top-20 z-40 bg-gray-50 py-2 shadow-md border-b border-gray-200">
+  <div class="container mx-auto px-4">
+    <details class="relative group">
+      <summary class="list-none cursor-pointer w-full bg-white border border-gray-300 rounded-md shadow-sm px-4 py-2 text-left text-lg font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 flex justify-between items-center">
+        <span>{data.filter ? formatTitle(data.filter) : 'All Categories'}</span>
+        <svg class="w-5 h-5 text-gray-400 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+        </svg>
+      </summary>
+      <div class="absolute mt-1 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto">
+        <div class="py-1">
+          <a href="/machines" class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {!data.filter ? 'font-bold text-indigo-600 bg-indigo-50' : ''}">
+            All Machines
+          </a>
+          {#each machineTypes as type (type.value)}
+            <a href="/machines?filter={type.value}" class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {data.filter === type.value ? 'font-bold text-indigo-600 bg-indigo-50' : ''}">
+              {type.title}
+            </a>
+          {/each}
+        </div>
+      </div>
+    </details>
+  </div>
+</div>
+
 {#if selectedMachine}
   <Modal on:close={closeModal}>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -111,7 +136,7 @@
 
 <div class="container mx-auto p-8">
   <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-    <aside class="lg:col-span-1 bg-white p-6 rounded-lg shadow-md h-fit">
+    <aside class="hidden lg:block lg:col-span-1 bg-white p-6 rounded-lg shadow-md h-fit sticky top-[6.5rem]">
       <h3 class="text-xl font-bold mb-4 text-slate-800">Categories</h3>
       <ul class="space-y-2">
         <li>
