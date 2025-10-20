@@ -28,7 +28,7 @@ export const machineType = defineType({
       title: 'Call for Price',
       description: 'Check this box to hide the price and show a "Contact us" link instead.',
       type: 'boolean',
-      initialValue: false, // Default to showing the price
+      initialValue: true, // Default to showing the price
     }),
     defineField({
       name: 'inStock',
