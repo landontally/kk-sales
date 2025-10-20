@@ -103,7 +103,7 @@
       {/if}
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedMachine.name}</h1>
-        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer}</p>
+        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>
           <div class="mt-4 font-bold text-lg">
           {#if selectedMachine.inStock}
             <p class="text-green-600">IN STOCK</p>
