@@ -111,6 +111,7 @@
             <p class="text-red-600">OUT OF STOCK</p>
           {/if}
           </div>
+
         <div class="mt-6">
           {#if selectedMachine.callForPrice}
             <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
@@ -120,17 +121,21 @@
             <p class="text-3xl font-bold text-blue-700">${selectedMachine.price}</p>
           {/if}
         </div>
-        {#if selectedMachine.manufacturerWebsite}
-          <a href={selectedMachine.manufacturerWebsite} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
-              Visit Manufacturer's Website &rarr;
+
+        <!-- MODIFIED: Now fetches the website from the manufacturer object -->
+        {#if selectedMachine.manufacturer?.website}
+          <a href={selectedMachine.manufacturer.website} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
+            Visit Manufacturer's Website &rarr;
           </a>
         {/if}
+
         {#if selectedMachine.notes}
           <div class="mt-6 pt-4 border-t border-gray-200">
             <h4 class="text-lg font-semibold text-gray-800 mb-2">Notes:</h4>
             <p class="text-gray-600 whitespace-pre-wrap">{selectedMachine.notes}</p>
           </div>
         {/if}
+
       </div>
     </div>
   </Modal>

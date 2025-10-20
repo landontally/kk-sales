@@ -156,7 +156,7 @@
             <div class="p-4 flex flex-col justify-between flex-grow">
               <div>
                 <h2 class="text-xl font-semibold text-slate-900 truncate" title={machine.name}>{machine.name}</h2>
-                <p class="text-slate-600 mt-1 capitalize">{machine.manufacturer}</p>
+                <p class="text-slate-600 mt-1 capitalize">{machine.manufacturer?.name}</p>              
               </div>
               <div class="mt-4">
                 {#if machine.callForPrice}
