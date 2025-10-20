@@ -115,7 +115,7 @@
         <div class="mt-6">
           {#if selectedMachine.callForPrice}
             <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
-              Please contact us for a price
+              Please contact Paul Buergler for a price
             </a>
           {:else}
             <p class="text-3xl font-bold text-blue-700">${selectedMachine.price}</p>
