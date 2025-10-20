@@ -57,10 +57,6 @@
     goto(url.toString(), { keepFocus: true, noScroll: true });
   }
 
-  let isCategoryDropdownOpen = false;
-  let categoryDropdownContainer: HTMLElement; // Reference to the dropdown's outer div
-  let categoryDropdownButton: HTMLElement; // Reference to the button
-
   // --- State for Mobile Category Dropdown ---
   let isCategoryDropdownOpen = false;
   let categoryDropdownContainer: HTMLElement; // Reference to the dropdown's outer div
