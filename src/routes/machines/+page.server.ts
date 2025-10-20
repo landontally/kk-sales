@@ -24,8 +24,15 @@ export async function load({ url }) {
     params.filter = filter;
   }
 
-  // Add the dynamic ordering to the query
-  groqQuery += `] | order(${finalOrder})`;
+  // Add the dynamic ordering and specify the fields to fetch
+  groqQuery += `] | order(${finalOrder}) {
+    ..., 
+    "slug": slug.current,
+    manufacturer->{ 
+      name,
+      website
+    }
+  }`;
 
   const machines = await client.fetch<Machine[]>(groqQuery, params);
 

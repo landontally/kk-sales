@@ -109,5 +109,12 @@ export const toyType = defineType({
         return true
       }).warning() // This .warning() makes the message show up in yellow, not red.
     }),
+    defineField({
+      name: 'notes',
+      title: 'Internal Notes',
+      description: 'Optional notes about this toy (not shown on product list cards).',
+      type: 'text',
+      rows: 3,
+    }),
   ],
 })

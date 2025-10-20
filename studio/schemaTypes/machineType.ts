@@ -70,12 +70,9 @@ export const machineType = defineType({
     defineField({
       name: 'manufacturer',
       title: 'Manufacturer',
-      type: 'string',
-    }),
-    defineField({
-      name: 'manufacturerWebsite',
-      title: 'Manufacturer Website',
-      type: 'url',
+      type: 'reference',
+      to: [{type: 'manufacturer'}], // Link to the new manufacturer type
+      validation: (Rule) => Rule.required(), // Make it required if desired
     }),
     defineField({
       name: 'image',
@@ -95,6 +92,13 @@ export const machineType = defineType({
       type: 'number',
       // This `hidden` property is the magic part for the Studio
       hidden: ({ document }) => document?.callForPrice === true,
+    }),
+    defineField({
+      name: 'notes',
+      title: 'Internal Notes',
+      description: 'Optional notes about this machine (not shown on product list cards).',
+      type: 'text', // 'text' allows for longer, multi-line notes
+      rows: 3, // Suggest a taller input field in the Studio
     }),
   ],
 })

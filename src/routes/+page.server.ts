@@ -8,9 +8,17 @@ export async function load() {
     const slideQuery = `*[_type == "heroSlide"] | order(sortOrder asc)`;
 
     // MODIFIED: Added "&& isNew == true" to filter for featured items only
-    const latestToysQuery = `*[_type == "toy" && isNew == true] | order(_createdAt desc) [0...8]`;
-    const latestMachinesQuery = `*[_type == "machine" && isNew == true] | order(_createdAt desc) [0...8]`;
-    
+    const latestToysQuery = `*[_type == "toy" && isNew == true] | order(_createdAt desc) [0...10] {
+        _id, name, slug, image, unitPrice, casePrice, caseQuantity, inStock, callForPrice, type, notes // <-- Add notes
+    }`;    
+    const latestMachinesQuery = `*[_type == "machine" && isNew == true] | order(_createdAt desc) [0...10] {
+        ...,
+        "slug": slug.current,
+        manufacturer->{
+          name,
+          website
+        }
+    }`;
     const eventBannerQuery = `*[_type == "eventBanner" && _id == "eventBanner"][0]`;
 
     const slides = await client.fetch<HeroSlide[]>(slideQuery);

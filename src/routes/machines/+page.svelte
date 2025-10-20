@@ -68,7 +68,10 @@
       {/if}
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedMachine.name}</h1>
-        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer}</p>
+        
+        <!-- MODIFIED: Now fetches the name from the manufacturer object -->
+        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>
+        
         <div class="mt-4 font-bold text-lg">
           {#if selectedMachine.inStock}
             <p class="text-green-600">IN STOCK</p>
@@ -76,6 +79,7 @@
             <p class="text-red-600">OUT OF STOCK</p>
           {/if}
         </div>
+        
         <div class="mt-6">
           {#if selectedMachine.callForPrice}
             <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
@@ -85,11 +89,22 @@
             <p class="text-3xl font-bold text-blue-700">${selectedMachine.price}</p>
           {/if}
         </div>
-        {#if selectedMachine.manufacturerWebsite}
-          <a href={selectedMachine.manufacturerWebsite} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
+        
+        <!-- MODIFIED: Now fetches the website from the manufacturer object -->
+        {#if selectedMachine.manufacturer?.website}
+          <a href={selectedMachine.manufacturer.website} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
             Visit Manufacturer's Website &rarr;
           </a>
         {/if}
+
+        <!-- ADDED: This block displays the notes if they exist -->
+        {#if selectedMachine.notes}
+          <div class="mt-6 pt-4 border-t border-gray-200">
+            <h4 class="text-lg font-semibold text-gray-800 mb-2">Notes:</h4>
+            <p class="text-gray-600 whitespace-pre-wrap">{selectedMachine.notes}</p>
+          </div>
+        {/if}
+
       </div>
     </div>
   </Modal>

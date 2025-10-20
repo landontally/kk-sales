@@ -11,10 +11,10 @@ export interface Machine {
   inStock?: boolean;
   isNew?: boolean;
   type?: 'crane' | 'arcade' | 'jukebox' | 'pinball' | 'pool' | 'changer' | 'ride' | 'redemption' | 'bulk_vending' | 'air_hockey' | 'self_merchandiser' | 'reconditioned';
-  manufacturer?: string;
-  manufacturerWebsite?: string;
+  manufacturer?: ManufacturerReference;
   image?: SanityImageSource;
   price?: string;
+  notes?: string;
 }
 
 // Based on studio/schemaTypes/toyType.ts
@@ -30,6 +30,7 @@ export interface Toy {
     unitPrice?: string;
     casePrice?: string;
     caseQuantity?: string;
+    notes?: string;
 }
 
 export interface HeroSlide {
@@ -50,4 +51,13 @@ export interface EventBanner {
   image?: SanityImageSource;
   altText?: string;
   link?: string;
+}
+
+// Add a new interface for the Manufacturer reference
+export interface ManufacturerReference {
+  _type: 'reference';
+  _ref: string;
+  // These fields are populated when the reference is followed in GROQ
+  name?: string;
+  website?: string;
 }
