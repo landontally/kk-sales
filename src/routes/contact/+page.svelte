@@ -39,7 +39,11 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-        <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+        <form 
+          name="contact" 
+          method="POST" 
+          netlify data-netlify-honeypot="bot-field"
+          data-sveltekit-reload >
           <input type="hidden" name="form-name" value="contact" />
 
           <!-- This is the honeypot field for bot protection. It's hidden from users. -->
