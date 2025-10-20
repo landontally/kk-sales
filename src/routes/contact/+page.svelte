@@ -40,7 +40,6 @@
         
         <!-- Netlify Form -->
         <form name="contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
-          <!-- This hidden input is required for Netlify Forms to work correctly. -->
           <input type="hidden" name="form-name" value="contact" />
 
           <!-- This is the honeypot field for bot protection. It's hidden from users. -->
