@@ -89,6 +89,8 @@
       </a>
     </div>
 
+    <a href="/" class="text-white hover:text-indigo-200 text-lg px-4">Home</a>
+
     <div class="hidden lg:flex items-center h-full">
       <div 
         role="button" tabindex="0"
