@@ -39,47 +39,17 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-        <form 
-          name="contact" 
-          method="POST" 
-          netlify 
-          data-netlify-honeypot="bot-field"
-          data-sveltekit-reload 
-          action="/contact/success" >
+        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" data-sveltekit-reload action="/contact/success">
           <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 
-          <!-- This is the honeypot field for bot protection. It's hidden from users. -->
-          <p class="hidden">
-            <label>
-              Don’t fill this out if you’re human: <input name="bot-field" />
-            </label>
-          </p>
-
-          <!-- Full Name Input -->
-          <div class="mb-5">
-            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input type="text" name="name" id="full-name" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="John Doe">
+          <div>
+            <label for="full-name">Full Name</label>
+            <input type="text" name="name" id="full-name" required>
           </div>
 
-          <!-- Email Input -->
-          <div class="mb-5">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input type="email" name="email" id="email" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="you@example.com">
-          </div>
-
-          <!-- Message Textarea -->
-          <div class="mb-6">
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea id="message" name="message" rows="5" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="Your message..."></textarea>
-          </div>
-
-          <div class="mt-8">
-            <button 
-              type="submit" 
-              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-            >
-              Submit
-            </button>
+          <div>
+            <button type="submit">Submit Test</button>
           </div>
         </form>
       </div>
