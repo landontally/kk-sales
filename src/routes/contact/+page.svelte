@@ -42,8 +42,10 @@
         <form 
           name="contact" 
           method="POST" 
-          netlify data-netlify-honeypot="bot-field"
-          data-sveltekit-reload >
+          netlify 
+          data-netlify-honeypot="bot-field"
+          data-sveltekit-reload 
+          action="/contact/success" >
           <input type="hidden" name="form-name" value="contact" />
 
           <!-- This is the honeypot field for bot protection. It's hidden from users. -->
