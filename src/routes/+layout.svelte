@@ -147,6 +147,7 @@
 
 {#if isMobileMenuOpen}
     <div bind:this={mobileMenuElement} class="lg:hidden bg-sky-700">
+      <a href="/" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Home</a>
       <a href="/machines" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Machines</a>
       <a href="/toys" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">Toys</a>
       <a href="/about" on:click={() => isMobileMenuOpen = false} class="block py-2 px-6 text-white hover:bg-blue-700">About Us</a>
