@@ -223,7 +223,7 @@
       </div>
     </div>
 
-    <div class="mt-12 border-t border-indigo-700 pt-8 text-center text-sm text-indigo-200">
+    <div class="mt-12 border-t border-stone-50 pt-8 text-center text-sm text-indigo-200">
       <p>&copy; {new Date().getFullYear()} K&K Sales. All rights reserved.</p>
     </div>
   </div>
