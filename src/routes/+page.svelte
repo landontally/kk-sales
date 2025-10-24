@@ -211,7 +211,7 @@
     Your trusted source for coin-operated crane machines, toys, arcade games, and more for over 50 years. 
   </p>
   <p class="text-xl text-slate-600 mt-4 max-w-2xl mx-auto">
-    To purchase a product or learn more information, please email us at mail@kksales.com or at (812) 334-1936.
+    To purchase a product or learn more information, please email us at mail@kksales.com or call at (812) 334-1936.
   </p>
   <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
     <a href="/machines" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-blue-50 hover:shadow-xl transition-all">
