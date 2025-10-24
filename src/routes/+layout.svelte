@@ -94,7 +94,7 @@
 
       <div 
         role="button" tabindex="0"
-        class="relative h-full flex items-center" 
+        class="relative h-full flex items-center"
         on:mouseenter={() => showMachinesDropdown = true} 
         on:mouseleave={() => showMachinesDropdown = false}>
         <a href="/machines" class="text-white hover:text-indigo-200 transition-colors text-lg px-4">Machines</a>
