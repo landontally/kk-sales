@@ -1,0 +1,13 @@
+<form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" data-sveltekit-reload action="/contact/success">
+  <input type="hidden" name="form-name" value="contact" />
+  <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
+
+  <div>
+    <label for="full-name">Full Name</label>
+    <input type="text" name="name" id="full-name" required>
+  </div>
+
+  <div>
+    <button type="submit">Submit Test</button>
+  </div>
+</form>
