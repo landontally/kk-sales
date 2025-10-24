@@ -39,7 +39,7 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" data-sveltekit-reload>
+        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" data-sveltekit-reload action="/contact/success">
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 
