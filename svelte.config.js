@@ -1,3 +1,4 @@
+// svelte.config.js
 import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
@@ -7,15 +8,15 @@ const config = {
 
 	kit: {
 		adapter: adapter(),
-
-		// START: Add this CSP block
-		csp: {
-			directives: {
-				'script-src': ["'self'"],
-				'img-src': ["'self'", 'data:', 'cdn.sanity.io'], // Allow images from Sanity's CDN
-			},
+		prerender: { // Ensure this section exists
+		  entries: [
+		    '/contact', 
+		    '/contact/success'
+		    // You can add '/about' etc. here too if they are static
+		  ],
+		  handleHttpError: 'warn' 
 		},
-		// END: Add this CSP block
+		csp: { /* ... your csp settings ... */	},
 	}
 };
 
