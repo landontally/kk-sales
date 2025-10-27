@@ -4,6 +4,9 @@
 </svelte:head>
 
 <script lang="ts">
+  import { enhance } from '$app/forms'; // Import enhance
+  import { page } from '$app/stores'; // Import page store if needed for messages
+
   // This is a Svelte component for a contact page.
   // It's designed to be used with SvelteKit and styled with Tailwind CSS.
   // The form is configured to work with Netlify Forms for submission handling and spam protection.
@@ -17,11 +20,12 @@
 
   // Google Maps embed URL, zoomed in on the specific address.
   const mapSrc = "https://maps.google.com/maps?q=1440%20South%20Liberty%20Drive%2C%20Bloomington%2C%20Indiana%2047403&t=&z=16&ie=UTF8&iwloc=&output=embed";
+
+  $: actionData = $page.form; // Reactive statement to get form action data if needed
 </script>
 
 <div class="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
   <div class="max-w-7xl mx-auto">
-    <!-- Page Header -->
     <div class="text-center mb-12">
       <h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl">
         Get in Touch
@@ -39,17 +43,35 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" data-sveltekit-reload>
+        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" use:enhance>
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 
-          <div>
-            <label for="full-name">Full Name</label>
-            <input type="text" name="name" id="full-name" required>
+          {#if actionData?.success}
+            <p class="mb-4 text-green-600 font-medium">Message sent successfully!</p> 
+            {:else if actionData?.error}
+            <p class="mb-4 text-red-600 font-medium">{actionData.error}</p>
+          {/if}
+          
+          <div class="mb-5">
+            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" name="name" id="full-name" required class="..." placeholder="John Doe" value={actionData?.name ?? ''}>
           </div>
 
-          <div>
-            <button type="submit">Submit Test</button>
+          <div class="mb-5">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input type="email" name="email" id="email" required class="..." placeholder="you@example.com" value={actionData?.email ?? ''}>
+          </div>
+
+          <div class="mb-6">
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="5" required class="..." placeholder="Your message...">{actionData?.message ?? ''}</textarea>
+          </div>
+
+          <div class="mt-8">
+            <button type="submit" class="...">
+              Submit
+            </button>
           </div>
         </form>
       </div>
