@@ -7,8 +7,7 @@
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover" class="bg-white"> <div style="display: contents">%sveltekit.body%</div>
-		<form name="contact" netlify netlify-honeypot="bot-field" hidden>
-			<input type="hidden" name="form-name" value="contact" />
+		<form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden> </form>			<input type="hidden" name="form-name" value="contact" />
 			<input type="text" name="name" />
 			<input type="email" name="email" />
 			<textarea name="message"></textarea>
