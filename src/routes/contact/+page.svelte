@@ -43,35 +43,31 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-        <form name="contact" method="POST" netlify data-netlify-honeypot="bot-field" use:enhance>
+<form 
+          name="contact" 
+          method="POST" 
+          netlify 
+          data-netlify-honeypot="bot-field"
+          data-sveltekit-reload 
+          >
           <input type="hidden" name="form-name" value="contact" />
           <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 
-          {#if actionData?.success}
-            <p class="mb-4 text-green-600 font-medium">Message sent successfully!</p> 
-            {:else if actionData?.error}
-            <p class="mb-4 text-red-600 font-medium">{actionData.error}</p>
-          {/if}
-          
           <div class="mb-5">
-            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input type="text" name="name" id="full-name" required class="..." placeholder="John Doe" value={actionData?.name ?? ''}>
-          </div>
-
+            <label for="full-name" ...>Full Name</label>
+            <input type="text" name="name" id="full-name" required class="..." placeholder="John Doe"> 
+            </div>
           <div class="mb-5">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input type="email" name="email" id="email" required class="..." placeholder="you@example.com" value={actionData?.email ?? ''}>
-          </div>
-
+            <label for="email" ...>Email Address</label>
+            <input type="email" name="email" id="email" required class="..." placeholder="you@example.com">
+             </div>
           <div class="mb-6">
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea id="message" name="message" rows="5" required class="..." placeholder="Your message...">{actionData?.message ?? ''}</textarea>
-          </div>
+            <label for="message" ...>Message</label>
+            <textarea id="message" name="message" rows="5" required class="..." placeholder="Your message..."></textarea> 
+            </div>
 
           <div class="mt-8">
-            <button type="submit" class="...">
-              Submit
-            </button>
+            <button type="submit" class="..."> Submit </button>
           </div>
         </form>
       </div>
