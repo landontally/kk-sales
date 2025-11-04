@@ -72,7 +72,7 @@
 </script>
 
 <svelte:head>
-  <title>K&K Sales | Crane Machines, Plush, and Toys</title>
+  <title>K&K Sales, LLC | Crane Machines, Plush, and Toys</title>
   <meta name="description" content="Your trusted source for coin-operated crane machines, toys, arcade games, and more." />
 </svelte:head>
 
@@ -234,7 +234,7 @@
     </div>
 
     <div class="mt-12 border-t border-stone-50 pt-8 text-center text-sm text-indigo-200">
-      <p>&copy; {new Date().getFullYear()} K&K Sales. All rights reserved.</p>
+      <p>&copy; {new Date().getFullYear()} K&K Sales LLC. All rights reserved.</p>
     </div>
   </div>
 </footer>

@@ -17,8 +17,8 @@
   export let data: PageData;
 
   $: title = data.filter 
-    ? `${formatTitle(data.filter)} | K&K Sales` 
-    : 'All Toys | K&K Sales';
+    ? `${formatTitle(data.filter)} | K&K Sales LLC` 
+    : 'All Toys | K&K Sales LLC';
 
   const toyTypes = [
     { title: 'Single Plush', value: 'single' },

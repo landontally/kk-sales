@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>K&K Sales | Homepage</title>
+  <title>K&K Sales, LLC | Homepage</title>
   <meta name="description" content="Welcome to K&K Sales, your trusted source for coin-operated amusements, toys, and more." />
 </svelte:head>
 
@@ -205,7 +205,7 @@
 
 <div class="container mx-auto p-8 text-center">
   <h1 class="text-5xl font-extrabold text-slate-900 mt-12">
-    Welcome to K&K Sales
+    Welcome to K&K Sales, LLC
   </h1>
   <p class="text-xl text-slate-600 mt-4 max-w-2xl mx-auto">
     Your trusted source for coin-operated crane machines, toys, arcade games, and more for over 50 years. 
@@ -214,16 +214,16 @@
     To purchase a product or learn more information, please email us at mail@kksales.com or call at (812) 334-1936.
   </p>
   <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-    <a href="/machines" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-blue-50 hover:shadow-xl transition-all">
-      <h2 class="text-3xl font-bold text-blue-700">View Our Machines</h2>
-      <p class="mt-2 text-slate-500">
-        Explore our wide selection of new and reconditioned crane and arcade machines.
-      </p>
-    </a>
     <a href="/toys" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-green-50 hover:shadow-xl transition-all">
       <h2 class="text-3xl font-bold text-green-700">Browse Our Toys</h2>
       <p class="mt-2 text-slate-500">
         From jumbo plush to bouncy balls, find the perfect prizes for your machines.
+      </p>
+    </a>
+    <a href="/machines" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-blue-50 hover:shadow-xl transition-all">
+      <h2 class="text-3xl font-bold text-blue-700">View Our Machines</h2>
+      <p class="mt-2 text-slate-500">
+        Explore our wide selection of new and reconditioned crane and arcade machines.
       </p>
     </a>
   </div>

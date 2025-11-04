@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>K&K Sales | Contact Us</title>
+  <title>K&K Sales, LLC | Contact Us</title>
   <meta name="description" content="Contact us to purchase toys, plush, and our game machines!" />
 </svelte:head>
 
@@ -43,12 +43,12 @@
         <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
         
         <!-- Netlify Form -->
-<form 
-  name="contact" 
-  method="POST" 
-  data-netlify="true" data-netlify-honeypot="bot-field"
-  data-sveltekit-reload 
->
+        <form 
+          name="contact" 
+          method="POST" 
+          data-netlify="true" data-netlify-honeypot="bot-field"
+          data-sveltekit-reload 
+        >
         <input type="hidden" name="form-name" value="contact" />
           <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 

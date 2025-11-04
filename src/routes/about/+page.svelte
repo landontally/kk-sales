@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>About Us | K&K Sales</title>
+  <title>About Us | K&K Sales, LLC</title>
   <meta name="description" content="Learn about the history and team behind K&K Sales, a leading distributor of coin amusement machines and toys since 1974." />
 </svelte:head>
 
@@ -50,7 +50,7 @@
       <h2 class="text-2xl font-bold text-slate-800 mt-8">Let's Get in Touch</h2>
       <div class="mt-2 space-y-4 text-lg text-slate-700">
         <p>
-          Whether you have a question or are ready to place an order, our dedicated team is here to help. <strong>Roz King and Jack Clarke</strong> are available Monday 
+          Whether you have a question or are ready to place an order, our dedicated team is here to help. <strong>Roz King</strong> is available Monday 
           through Friday to assist you. Give us a call at <a href="tel:1-812-334-1936" class="text-indigo-600 font-semibold hover:underline">(812) 334-1936</a> or send us an email anytime.
         </p>
       </div>
