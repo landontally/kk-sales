@@ -244,7 +244,7 @@
                   <p class="font-semibold text-blue-700">Contact for Price</p>
                 {:else}
                   <div class="flex justify-between items-center text-slate-700 font-medium text-base">
-                    <span>${toy.unitPrice} / Each</span>
+                    <span>${toy.unitPrice} / Piece</span>
                     <span>{toy.caseQuantity} / Case</span>
                   </div>
                   <p class="font-bold text-blue-700 text-lg mt-1">${toy.casePrice} / Case</p>
