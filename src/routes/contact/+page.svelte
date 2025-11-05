@@ -53,20 +53,26 @@
           <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
 
           <div class="mb-5">
-            <label for="full-name" ...>Full Name</label>
-            <input type="text" name="name" id="full-name" required class="..." placeholder="John Doe"> 
-            </div>
+            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <input type="text" name="name" id="full-name" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="John Doe">            
+          </div>
           <div class="mb-5">
-            <label for="email" ...>Email Address</label>
-            <input type="email" name="email" id="email" required class="..." placeholder="you@example.com">
-             </div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input type="email" name="email" id="email" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="you@example.com">
+          </div>
+
           <div class="mb-6">
-            <label for="message" ...>Message</label>
-            <textarea id="message" name="message" rows="5" required class="..." placeholder="Your message..."></textarea> 
-            </div>
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="5" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="Your message..."></textarea>
+          </div>
 
           <div class="mt-8">
-            <button type="submit" class="..."> Submit </button>
+            <button 
+              type="submit" 
+              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+            >
+              Submit
+            </button>
           </div>
         </form>
       </div>
