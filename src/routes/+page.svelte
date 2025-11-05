@@ -271,7 +271,11 @@
                   {#if toy.callForPrice}
                     <p class="font-semibold text-blue-700">Contact for Price</p>
                   {:else}
-                    <p class="font-bold text-blue-700">${toy.casePrice} / Case</p>
+                    <div class="flex justify-between items-center text-slate-700 font-medium text-sm">
+                      <span>${toy.unitPrice} / Each</span>
+                      <span>{toy.caseQuantity} / Case</span>
+                    </div>
+                    <p class="font-bold text-blue-700 text-base mt-1">${toy.casePrice} / Case</p>
                   {/if}
                 </div>
                 <div class="mt-2 font-bold text-sm">

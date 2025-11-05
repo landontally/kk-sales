@@ -104,32 +104,34 @@
         </svg>
       </button>
 
-      {#if isCategoryDropdownOpen}
-        <div 
-          class="absolute mt-1 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto"
-          role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
-        >
-          <div class="py-1" role="none">
+    {#if isCategoryDropdownOpen}
+      <div 
+        class="absolute mt-1 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto"
+        role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
+      >
+        <div class="py-1" role="none">
+          <a 
+            href="/toys" 
+            on:click={() => isCategoryDropdownOpen = false} 
+            class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {!data.filter ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
+            role="menuitem"
+          >
+            All Toys
+          </a>
+          {#each toyTypes as type (type.value)}
             <a 
-              href="/toys" on:click={() => isCategoryDropdownOpen = false} 
-              class="..."
+              href="/toys?filter={type.value}" 
+              on:click={() => isCategoryDropdownOpen = false} 
+              class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {data.filter === type.value ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
               role="menuitem"
             >
-              All Toys
+              {type.title}
             </a>
-            {#each toyTypes as type (type.value)}
-              <a 
-                href="/toys?filter={type.value}" 
-                on:click={() => isCategoryDropdownOpen = false} class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {data.filter === type.value ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
-                role="menuitem"
-              >
-                {type.title}
-              </a>
-            {/each}
-          </div>
+          {/each}
         </div>
-      {/if}
-    </div>
+      </div>
+    {/if}    
+  </div>
   </div>
 </div>
 
@@ -236,11 +238,16 @@
             {/if}
             <div class="p-4">
               <h2 class="text-xl font-semibold text-slate-900 truncate" title={toy.name}>{toy.name}</h2>
+              
               <div class="mt-4">
                 {#if toy.callForPrice}
                   <p class="font-semibold text-blue-700">Contact for Price</p>
                 {:else}
-                  <p class="font-bold text-blue-700">${toy.casePrice} / Case</p>
+                  <div class="flex justify-between items-center text-slate-700 font-medium text-base">
+                    <span>${toy.unitPrice} / Each</span>
+                    <span>{toy.caseQuantity} / Case</span>
+                  </div>
+                  <p class="font-bold text-blue-700 text-lg mt-1">${toy.casePrice} / Case</p>
                 {/if}
               </div>
 
