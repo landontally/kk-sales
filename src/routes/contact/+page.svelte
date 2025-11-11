@@ -1,27 +1,18 @@
 <svelte:head>
-  <title>K&K Sales, LLC | Contact Us</title>
+  <title>K&K Sales | Contact Us</title>
   <meta name="description" content="Contact us to purchase toys, plush, and our game machines!" />
 </svelte:head>
 
 <script lang="ts">
-  import { enhance } from '$app/forms'; // Import enhance
-  import { page } from '$app/stores'; // Import page store if needed for messages
-
-  // This is a Svelte component for a contact page.
-  // It's designed to be used with SvelteKit and styled with Tailwind CSS.
-  // The form is configured to work with Netlify Forms for submission handling and spam protection.
-
+  // Page constants for office info and map
   const officeInfo = {
     addressLine1: "1440 South Liberty Drive",
     addressLine2: "Bloomington, IN 47403",
     phone: "(812) 334-1936",
     facebookUrl: "https://www.facebook.com/profile.php?id=61556391602105",
   };
-
   // Google Maps embed URL, zoomed in on the specific address.
-  const mapSrc = "https://maps.google.com/maps?q=1440%20South%20Liberty%20Drive%2C%20Bloomington%2C%20Indiana%2047403&t=&z=16&ie=UTF8&iwloc=&output=embed";
-
-  $: actionData = $page.form; // Reactive statement to get form action data if needed
+  const mapSrc = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3094.654877797745!2d-86.55018618464236!3d39.13697997953463!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x886c66c306b9b357%3A0x882cf85662f3a4b!2s1440%20S%20Liberty%20Dr%2C%20Bloomington%2C%20IN%2047403!5e0!3m2!1sen!2sus!4v1698176211235!5m2!1sen!2sus";
 </script>
 
 <div class="bg-gray-50 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
@@ -31,55 +22,48 @@
         Get in Touch
       </h1>
       <p class="mt-4 text-xl text-gray-600">
-        We'd love to hear from you. Send us a message and we'll get back to you as soon as possible.
+        We'd love to hear from you.
       </p>
     </div>
 
-    <!-- Main Content Grid -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 py-8">
 
-      <!-- Left Column: Contact Form -->
-      <div class="bg-white p-8 rounded-2xl shadow-lg">
-        <h2 class="text-3xl font-bold text-gray-900 mb-6">Send a Message</h2>
+      <div class="bg-white p-8 rounded-2xl shadow-lg flex flex-col justify-center">
         
-        <!-- Netlify Form -->
-        <form 
-          name="contact" 
-          method="POST" 
-          data-netlify="true" data-netlify-honeypot="bot-field"
-          data-sveltekit-reload 
-        >
-        <input type="hidden" name="form-name" value="contact" />
-          <p class="hidden"><label>Bot field: <input name="bot-field" /></label></p>
+        <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Ready to Order?</h2>
 
-          <div class="mb-5">
-            <label for="full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-            <input type="text" name="name" id="full-name" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="John Doe">            
+        <div>
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">By Phone</h3>
+          <div class="space-y-4 text-slate-700">
+            <p class="text-xl font-medium leading-relaxed">
+              Call us at <a href="tel:812-334-1936" class="text-blue-700 hover:underline font-bold whitespace-nowrap">(812) 334-1936</a> and ask for:
+            </p>
+            <ul class="list-disc list-inside space-y-3 text-lg">
+              <li><strong>Roz King</strong> to inquire about toys.</li>
+              <li><strong>Paul Buergler</strong> to ask about our machines.</li>
+            </ul>
           </div>
-          <div class="mb-5">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-            <input type="email" name="email" id="email" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="you@example.com">
-          </div>
+        </div>
 
-          <div class="mb-6">
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea id="message" name="message" rows="5" required class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow" placeholder="Your message..."></textarea>
+        <div class="mt-8 pt-8 border-t border-gray-200">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-4">By Email</h3>
+          
+          <div class="flex items-center">
+            <svg class="w-7 h-7 mr-4 text-blue-600 flex-shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            <a href="mailto:mail@kksales.com" class="text-xl font-medium text-blue-700 hover:underline break-all">
+              mail@kksales.com
+            </a>
           </div>
+          
+          <p class="text-lg text-slate-600 mt-4">
+            Send us your questions, and we'll get back to you as soon as possible.
+          </p>
+        </div>
 
-          <div class="mt-8">
-            <button 
-              type="submit" 
-              class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-lg font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
       </div>
-
-      <!-- Right Column: Map and Info -->
       <div class="space-y-8">
-        <!-- Map -->
         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
            <iframe
             src="{mapSrc}"
@@ -93,7 +77,6 @@
           ></iframe>
         </div>
 
-        <!-- Office Information -->
         <div class="bg-white p-8 rounded-2xl shadow-lg">
           <h3 class="text-2xl font-bold text-gray-900 mb-4">Our Office</h3>
           <div class="space-y-4 text-gray-600 text-lg">
@@ -115,4 +98,3 @@
     </div>
   </div>
 </div>
-

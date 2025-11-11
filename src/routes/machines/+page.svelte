@@ -11,14 +11,13 @@
   import imageUrlBuilder from '@sanity/image-url';
   import { client } from '$lib/sanityClient';
   import Modal from '$lib/components/Modal.svelte';
-  import { onMount, onDestroy } from 'svelte'; // Import onDestroy
-  import { browser } from '$app/environment'; // Import browser check
+  import { onMount, onDestroy } from 'svelte';
+  import { browser } from '$app/environment';
 
   export let data: PageData;
-
   $: title = data.filter 
-    ? `${formatTitle(data.filter)} | K&K Sales LLC` 
-    : 'All Machines | K&K Sales LLC';
+    ? `${formatTitle(data.filter)} | K&K Sales` 
+    : 'All Machines | K&K Sales';
 
   const machineTypes = [
     { title: 'Crane Machines', value: 'crane' },
@@ -47,8 +46,19 @@
   
   function formatTitle(value: string | null | undefined) {
       if (!value) return '';
-      return value.charAt(0).toUpperCase() + value.slice(1);
+      // Fixed formatting for single-word values
+      return value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
+
+  // --- ADDED THIS FUNCTION ---
+  function formatPrice(price: string | number | undefined | null): string {
+    const num = parseFloat(String(price));
+    if (isNaN(num)) {
+      return ''; // Return blank string if no value
+    }
+    return num.toFixed(2); // Formats to 2 decimal places
+  }
+  // --- END FUNCTION ---
 
   function handleSortChange(event: Event) {
     const newSortOrder = (event.target as HTMLSelectElement).value;
@@ -57,9 +67,10 @@
     goto(url.toString(), { keepFocus: true, noScroll: true });
   }
 
+  // --- State for Mobile Category Dropdown ---
   let isCategoryDropdownOpen = false;
-  let categoryDropdownContainer: HTMLElement; // Reference to the dropdown's outer div
-  let categoryDropdownButton: HTMLElement; // Reference to the button
+  let categoryDropdownContainer: HTMLElement;
+  let categoryDropdownButton: HTMLElement;
 
   // --- Click Outside Logic for Category Dropdown ---
   function handleCategoryClickOutside(event: MouseEvent) {
@@ -84,7 +95,6 @@
       window.removeEventListener('click', handleCategoryClickOutside);
     }
   });
-
 </script>
 
 <div 
@@ -104,31 +114,33 @@
         </svg>
       </button>
 
-      {#if isCategoryDropdownOpen}
-        <div 
-          class="absolute mt-1 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto"
-          role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
-        >
-          <div class="py-1" role="none">
+    {#if isCategoryDropdownOpen}
+      <div 
+        class="absolute mt-1 w-full rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 max-h-72 overflow-y-auto"
+        role="menu" aria-orientation="vertical" aria-labelledby="options-menu"
+      >
+        <div class="py-1" role="none">
+          <a 
+            href="/machines" 
+            on:click={() => isCategoryDropdownOpen = false} 
+            class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {!data.filter ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
+            role="menuitem"
+          >
+            All Machines
+          </a>
+          {#each machineTypes as type (type.value)}
             <a 
-              href="/machines" 
-              on:click={() => isCategoryDropdownOpen = false} class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {!data.filter ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
+              href="/machines?filter={type.value}" 
+              on:click={() => isCategoryDropdownOpen = false} 
+              class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {data.filter === type.value ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
               role="menuitem"
             >
-              All Machines
+              {type.title}
             </a>
-            {#each machineTypes as type (type.value)}
-              <a 
-                href="/machines?filter={type.value}" 
-                on:click={() => isCategoryDropdownOpen = false} class="block px-4 py-2 text-lg text-gray-700 hover:bg-indigo-50 {data.filter === type.value ? 'font-bold text-indigo-600 bg-indigo-50' : ''}"
-                role="menuitem"
-              >
-                {type.title}
-              </a>
-            {/each}
-          </div>
+          {/each}
         </div>
-      {/if}
+      </div>
+    {/if} 
     </div>
   </div>
 </div>
@@ -145,42 +157,28 @@
       {/if}
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedMachine.name}</h1>
-        
-        <!-- MODIFIED: Now fetches the name from the manufacturer object -->
-        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>        
-        <div class="mt-4 font-bold text-lg">
-          {#if selectedMachine.inStock}
-            <p class="text-green-600">IN STOCK</p>
-          {:else}
-            <p class="text-red-600">OUT OF STOCK</p>
-          {/if}
-        </div>
+        <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>
         
         <div class="mt-6">
           {#if selectedMachine.callForPrice}
-            <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
-              Please contact Paul Buergler for a price
+            <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
+              Please contact us for a price
             </a>
           {:else}
-            <p class="text-3xl font-bold text-blue-700">${selectedMachine.price}</p>
+            <p class="text-3xl font-bold text-blue-700">${formatPrice(selectedMachine.price)}</p>
           {/if}
         </div>
-        
-        <!-- MODIFIED: Now fetches the website from the manufacturer object -->
         {#if selectedMachine.manufacturer?.website}
           <a href={selectedMachine.manufacturer.website} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
             Visit Manufacturer's Website &rarr;
           </a>
         {/if}
-
-        <!-- ADDED: This block displays the notes if they exist -->
         {#if selectedMachine.notes}
           <div class="mt-6 pt-4 border-t border-gray-200">
             <h4 class="text-lg font-semibold text-gray-800 mb-2">Notes:</h4>
             <p class="text-gray-600 whitespace-pre-wrap">{selectedMachine.notes}</p>
           </div>
         {/if}
-
       </div>
     </div>
   </Modal>
@@ -233,24 +231,18 @@
             <div class="p-4 flex flex-col justify-between flex-grow">
               <div>
                 <h2 class="text-xl font-semibold text-slate-900 truncate" title={machine.name}>{machine.name}</h2>
-                <p class="text-slate-600 mt-1 capitalize">{machine.manufacturer?.name}</p>              
+                <p class="text-slate-600 mt-1 capitalize">{machine.manufacturer?.name}</p>
               </div>
               <div class="mt-4">
                 {#if machine.callForPrice}
                   <p class="font-semibold text-blue-700">Contact for Price</p>
                 {:else}
-                  <p class="font-bold text-blue-700">${machine.price}</p>
+                  <p class="font-bold text-blue-700">${formatPrice(machine.price)}</p>
                 {/if}
-                <div class="mt-2 font-bold text-sm">
-                  {#if machine.inStock}
-                    <p class="text-green-600">IN STOCK</p>
-                  {:else}
-                    <p class="text-red-600">OUT OF STOCK</p>
-                  {/if}
+                
                 </div>
-              </div>
             </div>
-            </button>
+          </button>
         {/each}
       </div>
     </main>

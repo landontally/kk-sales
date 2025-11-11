@@ -50,6 +50,14 @@
       return value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
+  function formatPrice(price: string | number | undefined | null): string {
+    const num = parseFloat(String(price));
+    if (isNaN(num)) {
+      return '';
+    }
+    return num.toFixed(2);
+  }
+
   function handleSortChange(event: Event) {
     const newSortOrder = (event.target as HTMLSelectElement).value;
     const url = new URL($page.url);
@@ -167,11 +175,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
               <div>
                 <p class="text-sm text-slate-500">Price/Unit</p>
-                <p class="text-2xl font-bold text-slate-800">${selectedToy.unitPrice}</p>
+                <p class="text-2xl font-bold text-slate-800">${formatPrice(selectedToy.unitPrice)}</p>
               </div>
               <div>
                 <p class="text-sm text-slate-500">Price/Case</p>
-                <p class="text-2xl font-bold text-slate-800">${selectedToy.casePrice}</p>
+                <p class="text-2xl font-bold text-slate-800">${formatPrice(selectedToy.casePrice)}</p>
               </div>
               <div>
                 <p class="text-sm text-slate-500">Units Per Case</p>
@@ -244,7 +252,7 @@
                   <p class="font-semibold text-blue-700">Contact for Price</p>
                 {:else}
                   <div class="flex justify-between items-center text-slate-700 font-medium text-base">
-                    <span>${toy.unitPrice} / Piece</span>
+                    <span>${formatPrice(toy.unitPrice)} / Piece</span>
                     <span>{toy.caseQuantity} / Case</span>
                   </div>
                   <p class="font-bold text-blue-700 text-lg mt-1">${toy.casePrice} / Case</p>

@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>K&K Sales, LLC | Homepage</title>
+  <title>K&K Sales | Homepage</title>
   <meta name="description" content="Welcome to K&K Sales, your trusted source for coin-operated amusements, toys, and more." />
 </svelte:head>
 
@@ -20,11 +20,10 @@
   function openToyModal(toy: Toy) { selectedToy = toy; }
   function closeToyModal() { selectedToy = null; }
 
-  // START: Add Machine Modal Logic
+  // Machine Modal Logic
   let selectedMachine: Machine | null = null;
   function openMachineModal(machine: Machine) { selectedMachine = machine; }
   function closeMachineModal() { selectedMachine = null; }
-  // END: Add Machine Modal Logic
 
   const builder = imageUrlBuilder(client);
   function urlFor(source: any) {
@@ -36,6 +35,16 @@
       if (!value) return '';
       return value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
+
+  // --- ADDED THIS FUNCTION ---
+  function formatPrice(price: string | number | undefined | null): string {
+    const num = parseFloat(String(price));
+    if (isNaN(num)) {
+      return ''; // Return blank string if no value
+    }
+    return num.toFixed(2); // Formats to 2 decimal places
+  }
+  // --- END FUNCTION ---
 </script>
 
 {#if selectedToy}
@@ -60,18 +69,18 @@
           </div>
         <div class="mt-8 p-6 border rounded-lg bg-gray-50">
           {#if selectedToy.callForPrice}
-            <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedToy.name}" class="text-2xl font-bold text-blue-700 hover:underline">
+            <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedToy.name}" class="text-2xl font-bold text-blue-700 hover:underline">
               Please contact us for a price
             </a>
           {:else}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
               <div>
                 <p class="text-sm text-slate-500">Price/Unit</p>
-                <p class="text-2xl font-bold text-slate-800">${selectedToy.unitPrice}</p>
+                <p class="text-2xl font-bold text-slate-800">${formatPrice(selectedToy.unitPrice)}</p>
               </div>
               <div>
                 <p class="text-sm text-slate-500">Price/Case</p>
-                <p class="text-2xl font-bold text-slate-800">${selectedToy.casePrice}</p>
+                <p class="text-2xl font-bold text-slate-800">${formatPrice(selectedToy.casePrice)}</p>
               </div>
               <div>
                 <p class="text-sm text-slate-500">Units Per Case</p>
@@ -104,38 +113,27 @@
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedMachine.name}</h1>
         <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>
-          <div class="mt-4 font-bold text-lg">
-          {#if selectedMachine.inStock}
-            <p class="text-green-600">IN STOCK</p>
-          {:else}
-            <p class="text-red-600">OUT OF STOCK</p>
-          {/if}
-          </div>
-
-        <div class="mt-6">
+          
+          <div class="mt-6">
           {#if selectedMachine.callForPrice}
-            <a href="mailto:mail@kksales.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
-              Please contact Paul Buergler for a price
+            <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
+              Please contact us for a price
             </a>
           {:else}
-            <p class="text-3xl font-bold text-blue-700">${selectedMachine.price}</p>
+            <p class="text-3xl font-bold text-blue-700">${formatPrice(selectedMachine.price)}</p>
           {/if}
         </div>
-
-        <!-- MODIFIED: Now fetches the website from the manufacturer object -->
         {#if selectedMachine.manufacturer?.website}
           <a href={selectedMachine.manufacturer.website} target="_blank" rel="noopener noreferrer" class="inline-block mt-4 text-lg text-blue-600 hover:underline">
-            Visit Manufacturer's Website &rarr;
+              Visit Manufacturer's Website &rarr;
           </a>
         {/if}
-
         {#if selectedMachine.notes}
           <div class="mt-6 pt-4 border-t border-gray-200">
             <h4 class="text-lg font-semibold text-gray-800 mb-2">Notes:</h4>
             <p class="text-gray-600 whitespace-pre-wrap">{selectedMachine.notes}</p>
           </div>
         {/if}
-
       </div>
     </div>
   </Modal>
@@ -205,25 +203,41 @@
 
 <div class="container mx-auto p-8 text-center">
   <h1 class="text-5xl font-extrabold text-slate-900 mt-12">
-    Welcome to K&K Sales, LLC
+    Welcome to K&K Sales
   </h1>
   <p class="text-xl text-slate-600 mt-4 max-w-2xl mx-auto">
-    Your trusted source for coin-operated crane machines, toys, arcade games, and more for over 50 years. 
+    Your trusted source for coin-operated crane machines, toys, arcade games, and more 
+    for over 50 years.
   </p>
-  <p class="text-xl text-slate-600 mt-4 max-w-2xl mx-auto">
-    To purchase a product or learn more information, please email us at mail@kksales.com or call at (812) 334-1936.
+  <p class="text-xl text-slate-700 mt-4 max-w-2xl mx-auto">
+    Ready to order? Call our office at <span class="font-bold">812-334-1936</span> and ask for <span class="font-bold">Roz King</span> to purchase toys, or ask <span class="font-bold">Paul Buergler</span> about our machines.
   </p>
+  
   <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-    <a href="/toys" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-green-50 hover:shadow-xl transition-all">
-      <h2 class="text-3xl font-bold text-green-700">Browse Our Toys</h2>
-      <p class="mt-2 text-slate-500">
-        From jumbo plush to bouncy balls, find the perfect prizes for your machines.
+    
+    <a 
+      href="/toys" 
+      class="block p-8 rounded-lg shadow-lg bg-green-700 hover:bg-green-600 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 flex flex-col items-center text-center"
+    >
+      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4H5z" />
+      </svg>
+      
+      <h2 class="text-3xl font-bold text-white">Browse Our Toys</h2>
+      <p class="mt-2 text-green-100"> From jumbo plush to bouncy balls, find the perfect prizes for your machines.
       </p>
     </a>
-    <a href="/machines" class="block p-8 border rounded-lg shadow-lg bg-white hover:bg-blue-50 hover:shadow-xl transition-all">
-      <h2 class="text-3xl font-bold text-blue-700">View Our Machines</h2>
-      <p class="mt-2 text-slate-500">
-        Explore our wide selection of new and reconditioned crane and arcade machines.
+    
+    <a 
+      href="/machines" 
+      class="block p-8 rounded-lg shadow-lg bg-blue-700 hover:bg-blue-600 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 flex flex-col items-center text-center"
+    >
+      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21M10.5 21H3v-8.25M10.5 21h10.5m0-11.25h.75a2.25 2.25 0 000-4.5h-15a2.25 2.25 0 000 4.5h.75m0-4.5V3.75c0-1.5 1.5-3 3-3h9c1.5 0 3 1.5 3 3v2.25" />
+      </svg>
+
+      <h2 class="text-3xl font-bold text-white">View Our Machines</h2>
+      <p class="mt-2 text-blue-100"> Explore our wide selection of new and reconditioned crane and arcade machines.
       </p>
     </a>
   </div>
@@ -259,23 +273,24 @@
               {#if toy.image}
                 <img
                   src={urlFor(toy.image)?.width(550).height(450).auto('format').url()}
-                  alt={toy.name ?? 'Toy image'}
+                  alt={toy.name ?? 'Toy Image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
               <div class="p-4">
-                <h3 class="text-lg font-semibold text-slate-900 truncate">
+                <h3 class="text-lg font-semibold text-slate-900 truncate" title={toy.name}>
                   {toy.name}
                 </h3>
+                
                 <div class="mt-2">
                   {#if toy.callForPrice}
                     <p class="font-semibold text-blue-700">Contact for Price</p>
                   {:else}
                     <div class="flex justify-between items-center text-slate-700 font-medium text-sm">
-                      <span>${toy.unitPrice} / Piece</span>
+                      <span>${formatPrice(toy.unitPrice)} / Each</span>
                       <span>{toy.caseQuantity} / Case</span>
                     </div>
-                    <p class="font-bold text-blue-700 text-base mt-1">${toy.casePrice} / Case</p>
+                    <p class="font-bold text-blue-700 text-base mt-1">${formatPrice(toy.casePrice)} / Case</p>
                   {/if}
                 </div>
                 <div class="mt-2 font-bold text-sm">
@@ -322,8 +337,8 @@
             >
               {#if machine.image}
                 <img
-                  src={urlFor(machine.image)?.width(450).height(500).auto('format').url()}
-                  alt={machine.name ?? 'Machine image'}
+                  src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
+                  alt={machine.name ?? 'Machine Image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
               {/if}
@@ -333,17 +348,11 @@
                   {#if machine.callForPrice}
                     <p class="font-semibold text-blue-700">Contact for Price</p>
                   {:else}
-                    <p class="font-bold text-blue-700">${machine.price}</p>
+                    <p class="font-bold text-blue-700">${formatPrice(machine.price)}</p>
                   {/if}
                 </div>
-                <div class="mt-2 font-bold text-sm">
-                  {#if machine.inStock}
-                    <p class="text-green-600">IN STOCK</p>
-                  {:else}
-                    <p class="text-red-600">OUT OF STOCK</p>
-                  {/if}
+                
                 </div>
-              </div>
             </div>
           </SplideSlide>
         {/each}

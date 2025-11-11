@@ -223,14 +223,6 @@
               Follow us on Facebook
             </a>
           </div>
-          <div class="mt-2">
-            <a href="https://kksales.sanity.studio" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 hover:underline">
-              <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5.707 7.293l-6 6a1 1 0 01-1.414 0l-3-3a1 1 0 111.414-1.414L11 13.586l5.293-5.293a1 1 0 111.414 1.414z"></path>
-              </svg>
-              Admin Login
-            </a>
-          </div>
       </div>
     </div>
 
