@@ -9,7 +9,6 @@
   import { client } from '$lib/sanityClient';
   import { Splide, SplideSlide } from '@splidejs/svelte-splide';
   import '@splidejs/svelte-splide/css';
-  import { onMount } from 'svelte';
   import type { Toy, Machine } from '$lib/types';
   import Modal from '$lib/components/Modal.svelte';
 
@@ -36,7 +35,6 @@
       return value.split('_').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
   }
 
-  // --- ADDED THIS FUNCTION ---
   function formatPrice(price: string | number | undefined | null): string {
     const num = parseFloat(String(price));
     if (isNaN(num)) {
@@ -44,7 +42,6 @@
     }
     return num.toFixed(2); // Formats to 2 decimal places
   }
-  // --- END FUNCTION ---
 </script>
 
 {#if selectedToy}
@@ -113,8 +110,8 @@
       <div>
         <h1 class="text-3xl font-bold text-slate-900">{selectedMachine.name}</h1>
         <p class="text-lg text-slate-600 mt-2 capitalize">{selectedMachine.manufacturer?.name}</p>
-          
-          <div class="mt-6">
+        
+        <div class="mt-6">
           {#if selectedMachine.callForPrice}
             <a href="mailto:sales@yourcompany.com?subject=Price Inquiry for {selectedMachine.name}" class="text-2xl font-bold text-blue-700 hover:underline">
               Please contact us for a price
@@ -140,21 +137,26 @@
 {/if}
 
 <div class="w-full">
-  <Splide options={{
-    type: 'loop',
-    rewind: true,
-    perPage: 1,
-    autoplay: true,
-    interval: 7500,
-    pauseOnHover: true,
-    gap: '1rem',
-  }}>
+  <Splide 
+    role="region"
+    aria-label="Hero Slides"
+    options={{
+      type: 'loop',
+      rewind: true,
+      perPage: 1,
+      autoplay: true,
+      interval: 7500,
+      pauseOnHover: true,
+      gap: '1rem',
+    }}
+  >
     {#if data.slides && data.slides.length > 0}
       {#each data.slides as slide}
         <SplideSlide>
           <a 
             href={slide.link ?? '#'} 
             class="block w-full bg-gray-900 h-[70vh] md:h-[60vh] lg:h-[50vh]"
+            aria-label={slide.altText}
           >
             <picture class="w-full h-full block">
               {#if slide.imageMobile}
@@ -191,6 +193,7 @@
       target="_blank" 
       rel="noopener noreferrer"
       class="block w-full md:w-3/4 lg:w-1/2 mx-auto rounded-lg shadow-lg overflow-hidden transition-transform hover:scale-105"
+      aria-label={data.eventBanner.altText}
     >
       <img 
         src={urlFor(data.eventBanner.image)?.width(1200).auto('format').url()}
@@ -210,7 +213,7 @@
     for over 50 years.
   </p>
   <p class="text-xl text-slate-700 mt-4 max-w-2xl mx-auto">
-    Ready to order? Call our office at <span class="font-bold">812-334-1936</span> and ask for <span class="font-bold">Roz King</span> to purchase toys, or ask <span class="font-bold">Paul Buergler</span> about our machines.
+    Ready to order? Call our office at <a href="tel:812-334-1936" class="font-bold hover:underline">812-334-1936</a> and ask for <span class="font-bold">Roz King</span> to purchase toys, or ask <span class="font-bold">Paul Buergler</span> about our machines.
   </p>
   
   <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -219,7 +222,7 @@
       href="/toys" 
       class="block p-8 rounded-lg shadow-lg bg-green-700 hover:bg-green-600 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 flex flex-col items-center text-center"
     >
-      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4H5z" />
       </svg>
       
@@ -232,7 +235,7 @@
       href="/machines" 
       class="block p-8 rounded-lg shadow-lg bg-blue-700 hover:bg-blue-600 hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 flex flex-col items-center text-center"
     >
-      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+      <svg class="w-12 h-12 text-white mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l5.25-11.25L21 21M10.5 21H3v-8.25M10.5 21h10.5m0-11.25h.75a2.25 2.25 0 000-4.5h-15a2.25 2.25 0 000 4.5h.75m0-4.5V3.75c0-1.5 1.5-3 3-3h9c1.5 0 3 1.5 3 3v2.25" />
       </svg>
 
@@ -246,20 +249,24 @@
 <div class="w-full py-8">
   <div class="container mx-auto">
     <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">Our Newest Toys</h2>
-    <Splide options={{
-      type: 'loop',
-      perPage: 5,
-      perMove: 1,
-      gap: '1.5rem',
-      pagination: false,
-      drag: true,
-      breakpoints: {
-        1280: { perPage: 4 },
-        1024: { perPage: 3 },
-        768: { perPage: 2 },
-        640: { perPage: 1 },
-      }
-    }}>
+    <Splide 
+      role="region"
+      aria-label="Our Newest Toys"
+      options={{
+        type: 'loop',
+        perPage: 5,
+        perMove: 1,
+        gap: '1.5rem',
+        pagination: false,
+        drag: true,
+        breakpoints: {
+          1280: { perPage: 4 },
+          1024: { perPage: 3 },
+          768: { perPage: 2 },
+          640: { perPage: 1 },
+        }
+      }}
+    >
       {#if data.latestToys && data.latestToys.length > 0}
         {#each data.latestToys as toy}
           <SplideSlide class="p-4">
@@ -269,6 +276,7 @@
               on:click={() => openToyModal(toy)}
               on:keydown={(e) => e.key === 'Enter' && openToyModal(toy)}
               class="cursor-pointer h-full border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300"
+              aria-label="View details for {toy.name}"
             >
               {#if toy.image}
                 <img
@@ -312,19 +320,23 @@
 <div class="w-full py-8">
   <div class="container mx-auto">
     <h2 class="text-3xl font-bold text-center mb-8 text-slate-800">The Latest Machines</h2>
-    <Splide options={{
-      type: 'loop',
-      perPage: 5,
-      perMove: 1,
-      gap: '1.5rem',
-      pagination: false,
-      breakpoints: {
-        1280: { perPage: 4 },
-        1024: { perPage: 3 },
-        768: { perPage: 2 },
-        640: { perPage: 1 },
-      }
-    }}>
+    <Splide 
+      role="region"
+      aria-label="The Latest Machines"
+      options={{
+        type: 'loop',
+        perPage: 5,
+        perMove: 1,
+        gap: '1.5rem',
+        pagination: false,
+        breakpoints: {
+          1280: { perPage: 4 },
+          1024: { perPage: 3 },
+          768: { perPage: 2 },
+          640: { perPage: 1 },
+        }
+      }}
+    >
       {#if data.latestMachines && data.latestMachines.length > 0}
         {#each data.latestMachines as machine}
           <SplideSlide class="p-4">
@@ -334,6 +346,7 @@
               on:click={() => openMachineModal(machine)}
               on:keydown={(e) => e.key === 'Enter' && openMachineModal(machine)}
               class="cursor-pointer h-full border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300"
+              aria-label="View details for {machine.name}"
             >
               {#if machine.image}
                 <img
@@ -352,7 +365,7 @@
                   {/if}
                 </div>
                 
-                </div>
+              </div>
             </div>
           </SplideSlide>
         {/each}

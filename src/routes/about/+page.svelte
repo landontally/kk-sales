@@ -1,5 +1,5 @@
 <svelte:head>
-  <title>About Us | K&K Sales, LLC</title>
+  <title>About Us | K&K Sales</title>
   <meta name="description" content="Learn about the history and team behind K&K Sales, a leading distributor of coin amusement machines and toys since 1974." />
 </svelte:head>
 
@@ -15,6 +15,11 @@
     </div>
 
     <div class="mt-10">
+
+      <h1 class="text-4xl font-extrabold text-slate-900 mb-8 text-center md:text-left">
+        About K&K Sales
+      </h1>
+
       <div class="space-y-4 text-lg text-slate-700">
         <p>
           For over 50 years, K&K Sales has been a trusted partner for businesses across the nation. From our state-of-the-art, 130,000-square-foot facility in Bloomington, 
