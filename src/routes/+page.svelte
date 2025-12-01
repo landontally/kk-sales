@@ -49,7 +49,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#if selectedToy.image}
         <img
-          src={urlFor(selectedToy.image)?.width(800).auto('format').url()}
+          src={urlFor(selectedToy.image)?.width(800).format('jpg').url()}
           alt={selectedToy.name ?? 'Toy Image'}
           class="rounded-lg shadow-lg w-full"
         />
@@ -102,7 +102,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#if selectedMachine.image}
         <img
-          src={urlFor(selectedMachine.image)?.width(800).auto('format').url()}
+          src={urlFor(selectedMachine.image)?.width(800).format('jpg').url()}
           alt={selectedMachine.name ?? 'Machine Image'}
           class="rounded-lg shadow-lg w-full"
         />
@@ -162,18 +162,18 @@
               {#if slide.imageMobile}
                 <source
                   media="(max-width: 767px)"
-                  srcset={urlFor(slide.imageMobile)?.width(800).height(1000).auto('format').url()}
+                  srcset={urlFor(slide.imageMobile)?.width(800).height(1000).format('jpg').url()}
                 />
               {/if}
               {#if slide.imageTablet}
                 <source
                   media="(max-width: 1023px)"
-                  srcset={urlFor(slide.imageTablet)?.width(1023).height(600).auto('format').url()}
+                  srcset={urlFor(slide.imageTablet)?.width(1023).height(600).format('jpg').url()}
                 />
               {/if}
               {#if slide.imageDesktop}
                 <img
-                  src={urlFor(slide.imageDesktop)?.width(1920).height(700).auto('format').url()}
+                  src={urlFor(slide.imageDesktop)?.width(1920).height(700).format('jpg').url()}
                   alt={slide.altText}
                   class="w-full h-full object-cover"
                 />
@@ -196,7 +196,7 @@
       aria-label={data.eventBanner.altText}
     >
       <img 
-        src={urlFor(data.eventBanner.image)?.width(1200).auto('format').url()}
+        src={urlFor(data.eventBanner.image)?.width(1200).format('jpg').url()}
         alt={data.eventBanner.altText}
         class="w-full h-auto"
       />
@@ -280,7 +280,7 @@
             >
               {#if toy.image}
                 <img
-                  src={urlFor(toy.image)?.width(550).height(450).auto('format').url()}
+                  src={urlFor(toy.image)?.width(550).height(450).format('jpg').url()}
                   alt={toy.name ?? 'Toy Image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />
@@ -350,7 +350,7 @@
             >
               {#if machine.image}
                 <img
-                  src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
+                  src={urlFor(machine.image)?.width(550).height(600).format('jpg').url()}
                   alt={machine.name ?? 'Machine Image'}
                   class="w-full h-64 object-contain pointer-events-none"
                 />

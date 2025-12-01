@@ -150,7 +150,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#if selectedMachine.image}
         <img
-          src={urlFor(selectedMachine.image)?.width(800).auto('format').url()}
+          src={urlFor(selectedMachine.image)?.width(800).format('jpg').url()}
           alt={selectedMachine.name ?? 'Machine Image'}
           class="rounded-lg shadow-lg w-full"
         />
@@ -223,7 +223,7 @@
           <button on:click={() => openModal(machine)} class="cursor-pointer text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
             {#if machine.image}
               <img
-                src={urlFor(machine.image)?.width(550).height(600).auto('format').url()}
+                src={urlFor(machine.image)?.width(550).height(600).format('jpg').url()}
                 alt={machine.name ?? 'Machine image'}
                 class="w-full h-48 object-contain"
               />

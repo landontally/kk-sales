@@ -148,7 +148,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       {#if selectedToy.image}
         <img
-          src={urlFor(selectedToy.image)?.width(800).auto('format').url()}
+          src={urlFor(selectedToy.image)?.width(800).format('jpg').url()}
           alt={selectedToy.name ?? 'Toy Image'}
           class="rounded-lg shadow-lg w-full"
         />
@@ -239,7 +239,7 @@
           <button on:click={() => openModal(toy)} class="cursor-pointer text-left block border rounded-lg shadow-md bg-white overflow-hidden transition-transform hover:scale-105 duration-300">
             {#if toy.image}
               <img
-                src={urlFor(toy.image)?.width(600).height(500).auto('format').url()}
+                src={urlFor(toy.image)?.width(600).height(500).format('jpg').url()}
                 alt={toy.name ?? 'Toy image'}
                 class="w-full h-48 object-contain"
               />
