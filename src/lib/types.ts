@@ -47,6 +47,7 @@ export interface HeroSlide {
 export interface EventBanner {
   _id: string;
   _type: 'eventBanner';
+  active?: boolean; // <-- Add this line
   title?: string;
   image?: SanityImageSource;
   altText?: string;

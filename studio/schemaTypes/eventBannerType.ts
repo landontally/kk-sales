@@ -12,6 +12,15 @@ export const eventBannerType = defineType({
       description: 'A title for the event or promotion.',
       type: 'string',
     }),
+    // START: ADD THIS NEW FIELD
+    defineField({
+      name: 'active',
+      title: 'Show Banner',
+      description: 'Toggle this ON to display the banner on the website. Turn it OFF to hide it.',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    // END: ADD THIS NEW FIELD
     defineField({
       name: 'image',
       title: 'Banner Image',

@@ -186,7 +186,7 @@
   </Splide>
 </div>
 
-{#if data.eventBanner && data.eventBanner.image}
+{#if data.eventBanner && data.eventBanner.image && data.eventBanner.active}
   <div class="container mx-auto px-8 py-10">
     <a 
       href={data.eventBanner.link} 
@@ -196,7 +196,7 @@
       aria-label={data.eventBanner.altText}
     >
       <img 
-        src={urlFor(data.eventBanner.image)?.width(1200).format('jpg').url()}
+        src={urlFor(data.eventBanner.image)?.width(1200).auto('format').url()}
         alt={data.eventBanner.altText}
         class="w-full h-auto"
       />
