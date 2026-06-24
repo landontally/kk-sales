@@ -35,6 +35,7 @@
     { title: 'Medium Plush', value: 'medium' },
     { title: 'Jumbo Plush', value: 'jumbo' },
     { title: 'Plastic Toys', value: 'plastic' },
+    { title: 'Squishy Toys', value: 'squishy' },
     { title: '2 Inch Ducks', value: 'ducks' },
     { title: 'Beanies', value: 'beanies' },
     { title: 'Collegiate Beanies', value: 'collegiate' },

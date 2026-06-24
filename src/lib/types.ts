@@ -25,7 +25,7 @@ export interface Toy {
     slug?: { current: string };
     inStock?: boolean;
     isNew?: boolean;
-    type?: 'single' | 'medium' | 'jumbo' | 'plastic' | 'beanies' | 'collegiate' | 'watches' | '5inch_rubber_balls' | 'bulk_bouncing_balls' | 'puffer_balls' | 'treasure_chests' | 'christmas_toys';
+    type?: 'single' | 'medium' | 'jumbo' | 'plastic' | 'squishy' | 'ducks' | 'beanies' | 'collegiate' | 'watches' | '5inch_rubber_balls' | 'bulk_bouncing_balls' | 'puffer_balls' | 'treasure_chests' | 'christmas_toys';
     image?: SanityImageSource;
     unitPrice?: string;
     casePrice?: string;
