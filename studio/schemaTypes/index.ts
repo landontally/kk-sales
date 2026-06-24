@@ -4,12 +4,12 @@ import { eventBannerType } from './eventBannerType'
 import { heroSlideType } from './heroSlideType'
 import { machineType } from './machineType'
 import { toyType } from './toyType'
-import { manufacturerType } from './manufacturerType' // <-- Import here
+import { manufacturerType } from './manufacturerType' 
 
 export const schemaTypes = [
   eventBannerType,
   heroSlideType,
   machineType,
   toyType,
-  manufacturerType, // <-- Add here
+  manufacturerType, 
 ] as const
